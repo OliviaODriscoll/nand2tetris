@@ -1,0 +1,14 @@
+Not16(in=x,out=notX); 16
+Not16(in=y,out=notY); 16
+Mux4Way16(a=x,b=notX,c=false,d=true,sel[1]=zx,sel[0]=nx,out=outx); 384
+Mux4Way16(a=y,b=notY,c=false,d=true,sel[1]=zy,sel[0]=ny,out=outy); 384
+And16(a=outx,b=outy,out=outAnd); 32
+Add16(a=outx,b=outy,out=outAdd); 
+Mux16(a=outAnd,b=outAdd,sel=f,out=outf); 128
+Not16(in=outf,out=outNotf); 16
+Mux16(a=outf,b=outNotf,sel=no,out=out); 128
+
+
+Mux16(a=outf,b=outNotf,sel=no,out=outM);
+CheckZero(in=outM, out=zr); // build a simple chip that outputs 1 if outM is zero
+CheckNegative(in=outM,out=ng); // build a simple chip that outputs 1 if outM is negative

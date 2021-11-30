@@ -1,0 +1,18 @@
+/**
+*
+*
+ */
+
+CHIP circuit {
+    IN a, b, c;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    Not(in=a,out=d);
+    Xor(a=a,b=d,out=e);
+    And(a=a,b=b,out=f);
+    Nand(a=b,b=c,out=g);
+    Xor(a=e,b=f,out=h);
+    Nand(a=g,b=h,out=out);
+}
