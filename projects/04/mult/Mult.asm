@@ -10,3 +10,30 @@
 // R0 >= 0, R1 >= 0, and R0*R1 < 32768.
 
 // Put your code here.
+
+// set R2 to 0
+@2
+M = 0
+
+(LOOP)
+@END
+@1
+// jump to end if counter < 0
+M;JEQ
+// subtract one from our counter
+@1
+M = M-1
+
+// set D to first multiplication val
+@0
+D = M
+
+// add R0 to R2
+@2
+M = M + D
+@LOOP
+0;JMP
+
+(END)
+@END
+0;JMP
