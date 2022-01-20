@@ -23,11 +23,14 @@
 	@n
 	M=M-1
 	D=M
+
 	@INIT
 	D;JLT               //if index<0 - reset in init fn
+
 	@KBD	            //loads the keyboard's address
 	D=M
 	@CLEAR		        //if no key pressed, clear screen
+    
 	D;JEQ
 	@FILL
 	0;JMP
