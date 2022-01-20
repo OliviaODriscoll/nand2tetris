@@ -16,24 +16,25 @@
 M = 0
 
 (LOOP)
-@END
-@1
-// jump to end if counter < 0
-M;JEQ
-// subtract one from our counter
-@1
-M = M-1
+    @END
+    @1
+    // jump to end if counter < 0
+    M;JEQ
 
-// set D to first multiplication val
-@0
-D = M
+    // subtract one from our counter
+    @1
+    M = M-1
 
-// add R0 to R2
-@2
-M = M + D
-@LOOP
-0;JMP
+    // set D to first multiplication val
+    @0
+    D = M
+
+    // add R0 to R2
+    @2
+    M = M + D
+    @LOOP
+    0;JMP
 
 (END)
-@END
-0;JMP
+    @END
+    0;JMP
