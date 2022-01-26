@@ -19,7 +19,7 @@
 	@n                   
 	M=D
 
-(LOOP)	           //reduce index by one to point to other pixels 
+(LOOP)	           //reduce index by one to point to next pixel 
 	@n
 	M=M-1
 	D=M
@@ -41,14 +41,14 @@
 	@n
 	A=D+M              //adds the current index to the screen's first address in order to color the current set of 16 pixels
 	M=-1               //sets value in current address to -1, whole screen segment goes white
-	@LOOP              //jumps back to indexer in order to progress the index backwards.
+	@LOOP              //jumps back to loop to decrement the address
 	0;JMP
 
 (CLEAR)
 	@SCREEN            //load screen address
 	D=A                
 	@n        
-	A=D+M              //adds the current index to the screen's first address in order to color the current set of 16 pixels
+	A=D+M              //adds the current address to the screen's first address in order to color the current set of 16 pixels
 	M=0                //sets value in current address to 0, all pixels paint black
 	@LOOP              //sub one from pointer address again
 	0;JMP
