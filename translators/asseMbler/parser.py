@@ -15,9 +15,7 @@ class parse():
         return
 
     def hasMoreLines(self):
-        if self.length == (self.currentIndex + 1):
-            return False
-        return True
+        return not(self.length == (self.currentIndex + 1))
 
     def advance(self):
         skip = True
@@ -28,7 +26,8 @@ class parse():
             processedLine = processedLine.replace(' ','')
 
             if "//" in processedLine: # found comment
-                processedLine = processedLine[:1]
+                commentIndex = processedLine.find("//")
+                processedLine = processedLine[:commentIndex]
 
             if processedLine!='':
                 skip = False
@@ -39,7 +38,7 @@ class parse():
     def instructionType(self):
         if self.currentInstruction.startswith("@"):
             return "A_INSTRUCTION"
-        elif ";" in self.currentInstruction:
+        else:
             return "C_INSTRUCTION"
 
     def symbol(self):
@@ -47,32 +46,28 @@ class parse():
 
     def dest(self):
         if "=" in self.currentInstruction:
-            index = self.instruction.find("=")
-            return self.instruction[:index]
+            index = self.currentInstruction.find("=")
+            return self.currentInstruction[:index]
         else:
             return "null"
-        return
 
     def comp(self):
+        equalIndex = self.currentInstruction.find("=")
         semiColonIndex = self.currentInstruction.find(";")
-        equalIndex = self.currentInstruction.find("=") + 1
 
-        if not ("=" and ";" in self.currentInstruction):
-            return self.currentInstruction
-
-        elif not "=" in self.currentInstruction:
+        if equalIndex ==-1 and semiColonIndex == -1:
+            return self.currentInstruction()
+        elif equalIndex == -1:
             return self.currentInstruction[:semiColonIndex]
-
-        elif not ";" in self.currentInstruction:
-            return self.currentInstruction[equalIndex:]
-
+        elif semiColonIndex == -1:
+            return self.currentInstruction[equalIndex+1:]
         else:
-            return self.currentInstruction[equalIndex:semiColonIndex]
+            return self.currentInstruction[equalIndex+1:semiColonIndex]
 
 
     def jump(self):
         if ";" in self.currentInstruction:
-            index = self.currentInstruction.find(";") + 1
-            return self.currentInstruction[index:]
+            index = self.currentInstruction.find(";")
+            return self.currentInstruction[index+1:]
         else:
             return "null"
