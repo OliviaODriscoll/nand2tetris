@@ -17,16 +17,23 @@ class parse():
     def hasMoreLines(self):
         if self.length == (self.currentIndex + 1):
             return False
-        else:
-            return True
+        return True
 
     def advance(self):
-        # check if line is a comment or if line is blank
-        self.lines[self.currentIndex] = self.lines[self.currentIndex].strip()
-        if (not self.lines[self.currentIndex].startswith("//")) or (self.lines[self.currentIndex]):
-            self.currentIndex += 1
-            self.currentInstruction = self.lines[self.currentIndex]
+        skip = True
+        while skip:
+            self.currentIndex +=1
+            rawLine = self.lines[self.currentIndex]
+            processedLine = rawLine.strip()
+            processedLine = processedLine.replace(' ','')
 
+            if "//" in processedLine: # found comment
+                processedLine = processedLine[:1]
+
+            if processedLine!='':
+                skip = False
+        
+        self.currentInstruction = processedLine
         return
 
     def instructionType(self):
@@ -36,13 +43,36 @@ class parse():
             return "C_INSTRUCTION"
 
     def symbol(self):
-        return
+        return self.currentInstruction[1:]
 
     def dest(self):
+        if "=" in self.currentInstruction:
+            index = self.instruction.find("=")
+            return self.instruction[:index]
+        else:
+            return "null"
         return
 
     def comp(self):
-        return
+        semiColonIndex = self.currentInstruction.find(";")
+        equalIndex = self.currentInstruction.find("=") + 1
+
+        if not ("=" and ";" in self.currentInstruction):
+            return self.currentInstruction
+
+        elif not "=" in self.currentInstruction:
+            return self.currentInstruction[:semiColonIndex]
+
+        elif not ";" in self.currentInstruction:
+            return self.currentInstruction[equalIndex:]
+
+        else:
+            return self.currentInstruction[equalIndex:semiColonIndex]
+
 
     def jump(self):
-        return
+        if ";" in self.currentInstruction:
+            index = self.currentInstruction.find(";") + 1
+            return self.currentInstruction[index:]
+        else:
+            return "null"

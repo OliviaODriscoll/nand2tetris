@@ -1,4 +1,5 @@
 # define path to file to be translated
+from ctypes import addressof
 import os
 from parser import parse
 
@@ -20,10 +21,11 @@ while parseObj.hasMoreLines():
     parseObj.advance()
     instructionType = parseObj.instructionType()
     if instructionType == "A_INSTRUCTION":
+        address = parseObj.symbol()
         print("a")
-    elif instructionType == "C_INSTRUCTION":
-        print("c")
     else:
-        print("undefined")
-
+        dest = parseObj.dest()
+        comp = parseObj.comp()
+        jump = parseObj.jump()
+        
 outFile.close()
