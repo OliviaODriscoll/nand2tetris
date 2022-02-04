@@ -39,4 +39,4 @@ class symbolTable():
         else:
             self.nextAddress +=1
             self.addEntry({key:str(self.nextAddress)})
-        return
+        return self.nextAddress
