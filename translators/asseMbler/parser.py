@@ -11,13 +11,13 @@ class parse():
         self.currentInstruction = ""
         # set current index to -1
         self.currentIndex = -1
-
+        self.indexOut = -1
         return
 
     def hasMoreLines(self):
         return not(self.length == (self.currentIndex + 1))
 
-    def advance(self):
+    def advance(self, whichPass):
         skip = True
         while skip:
             self.currentIndex +=1
@@ -38,10 +38,13 @@ class parse():
     def instructionType(self):
         if self.currentInstruction.startswith("@"):
             return "A_INSTRUCTION"
+        elif :
+            return "L_INSTRUCTION"
         else:
             return "C_INSTRUCTION"
 
     def symbol(self):
+        # make it correctly return based on whether @x, where x is a dec or var
         return self.currentInstruction[1:]
 
     def dest(self):
