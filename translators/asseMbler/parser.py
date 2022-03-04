@@ -1,4 +1,9 @@
-class parse():
+from SymbolTable import SymbolTable
+
+
+class Parse():
+    
+    symObj = SymbolTable()
 
     def __init__(self, path):
         # open file and get raw data
@@ -24,28 +29,39 @@ class parse():
             rawLine = self.lines[self.currentIndex]
             processedLine = rawLine.strip()
             processedLine = processedLine.replace(' ','')
+            i = processedLine.find("//")
 
-            if "//" in processedLine: # found comment
-                commentIndex = processedLine.find("//")
-                processedLine = processedLine[:commentIndex]
+            if i!=-1:
+                processedLine = processedLine[:i]
+            #print("raw line: {}, currentIndex: {}, processedLine:{}".format(rawLine,self.currentIndex,processedLine))
+                
+            if whichPass == "firstPass":
+                if processedLine!='':
+                    skip = False
+                    self.indexOut +=1
+            else:
+                if processedLine!='' and not processedLine.startswith("("):
+                    skip=False
+                    self.indexOut+=1
 
-            if processedLine!='':
-                skip = False
-        
         self.currentInstruction = processedLine
         return
 
     def instructionType(self):
         if self.currentInstruction.startswith("@"):
             return "A_INSTRUCTION"
-        elif :
-            return "L_INSTRUCTION"
+        elif self.currentInstruction[0] =="(":
+            return "L_INSTRUCTION" 
         else:
             return "C_INSTRUCTION"
 
     def symbol(self):
         # make it correctly return based on whether @x, where x is a dec or var
-        return self.currentInstruction[1:]
+        instruction = self.currentInstruction
+        if instruction[0] =='@':
+            return instruction[1:]
+        else:
+            return instruction[1:-1]
 
     def dest(self):
         if "=" in self.currentInstruction:
@@ -58,7 +74,7 @@ class parse():
         equalIndex = self.currentInstruction.find("=")
         semiColonIndex = self.currentInstruction.find(";")
 
-        if equalIndex ==-1 and semiColonIndex == -1:
+        if equalIndex == -1 and semiColonIndex == -1:
             return self.currentInstruction()
         elif equalIndex == -1:
             return self.currentInstruction[:semiColonIndex]
@@ -66,7 +82,6 @@ class parse():
             return self.currentInstruction[equalIndex+1:]
         else:
             return self.currentInstruction[equalIndex+1:semiColonIndex]
-
 
     def jump(self):
         if ";" in self.currentInstruction:

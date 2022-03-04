@@ -1,4 +1,4 @@
-class symbolTable():
+class SymbolTable():
 
     def __init__(self):
         self.symbolTable = dict()
@@ -18,14 +18,14 @@ class symbolTable():
         self.symbolTable.update({"SCREEN": "16384"})
         self.symbolTable.update({"KBD": "24576"})
 
-        # r0..r15
+        # add R0 to R15 in addresses 0 to 15
         for i in range(16):
-            varName = "R{}".format(str(i))
-            self.symbolTable.update({varName: str(i)})
+            keyName = "R{}".format(str(i))
+            self.symbolTable.update({keyName: str(i)})
 
     def contains(self, key):
         # if key param is in dict, return true
-        return key in self.symbolTable
+        return (key in self.symbolTable.keys())
 
     def addEntry(self, key, value):
         # add new key to dict
@@ -34,9 +34,4 @@ class symbolTable():
 
     def getAddress(self, key):
         # return val of dict by finding it with param key
-        if self.contains(key):
-            return self.symbolTable[key]
-        else:
-            self.nextAddress +=1
-            self.addEntry({key:str(self.nextAddress)})
-        return self.nextAddress
+        return self.symbolTable.get(key)
