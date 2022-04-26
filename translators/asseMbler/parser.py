@@ -33,7 +33,6 @@ class Parse():
 
             if i!=-1:
                 processedLine = processedLine[:i]
-            #print("raw line: {}, currentIndex: {}, processedLine:{}".format(rawLine,self.currentIndex,processedLine))
                 
             if whichPass == "firstPass":
                 if processedLine!='':
