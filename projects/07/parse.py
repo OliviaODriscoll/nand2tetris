@@ -7,6 +7,7 @@ class parser():
 		self.curIndex = -1
 		self.curInstruction = ''
 		file.close()
+		self.argument1 = ''
 		return
 
 	def hasMoreLines(self):
@@ -30,6 +31,18 @@ class parser():
 			return "C_POP"
 		elif instruction.startswith('push'):
 			return "C_PUSH"
+		elif instruction.startswith('label'):
+			return "C_LABEL"
+		elif instruction.startswith('goto'):
+			return "C_GOTO"
+		elif instruction.startswith('if'):
+			return "C_IF"
+		elif instruction.startswith('function'):
+			return "C_FUNCTION"
+		elif instruction.startswith('return'):
+			return "C_RETURN"
+		elif instruction.startswith('call'):
+			return "C_CALL"
 		else:
 			return "C_ARITHMETIC"
 
@@ -38,7 +51,10 @@ class parser():
 		index = instruction.find(" ")
 		instruction = instruction[index+1:]
 		index = instruction.find(' ')
-		return instruction[:index]
+		if not index == -1:
+			return instruction[:index]
+		else: 
+			return instruction
 
 	def arg2(self):
 		instruction = self.curInstruction

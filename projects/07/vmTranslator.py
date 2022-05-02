@@ -4,9 +4,10 @@ from code import CodeWriter
 
 
 ### define a path to the file you want to translate ###
-basepath = 'G:/My Drive/2021-22/ICS4U/nand2tetris/projects/07/' # project 07 folder
-folder = 'StackArithmetic/StackTest/' # test folder
-file= 'StackTest.vm' # test program
+basepath = 'G:/My Drive/2021-22/ICS4U/nand2tetris/projects/08/' # project 07 folder
+name = "FibonacciSeries"
+folder = f'ProgramFlow/{name}/' # test folder
+file = f'{name}.vm' # test program
 
 inputFilePath = basepath+folder+file # full path to file you want to translate (input file)
 outputFilePath = inputFilePath[:-3]+'.asm' # full path to output file
@@ -26,6 +27,13 @@ while parseObj.hasMoreLines():  # check if there are lines in the input file lef
         seg = parseObj.arg1() # segment 'seg' of command
         i = parseObj.arg2() # index 'i' of command
         codeObj.writePushPop(comType,seg,i) # translate a push pop command
+    elif comType == "C_LABEL":
+        print(parseObj.arg1())
+        codeObj.writeLabel(parseObj.arg1())
+    elif comType == "C_GOTO":
+        codeObj.writeGoto(parseObj.arg1())
+    elif comType == "C_IF":
+        codeObj.writeIf(parseObj.arg1())
     else: # arithmetic command detected
         codeObj.writeArithmetic(parseObj.curInstruction) # translate an arithmetic command
 

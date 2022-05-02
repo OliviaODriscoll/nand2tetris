@@ -2,21 +2,21 @@
 D=A
 @SP
 M=D
-//push constant
- @17 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@17
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
-//push constant
- @17 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@17
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //JNE
 @SP
@@ -39,21 +39,21 @@ M=0
 (INC_STACK_POINTER_EQ1)
 @SP
 M=M+1
-//push constant
- @17 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@17
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
-//push constant
- @16 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@16
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //JNE
 @SP
@@ -76,21 +76,21 @@ M=0
 (INC_STACK_POINTER_EQ2)
 @SP
 M=M+1
-//push constant
- @16 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@16
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
-//push constant
- @17 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@17
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //JNE
 @SP
@@ -113,21 +113,21 @@ M=0
 (INC_STACK_POINTER_EQ3)
 @SP
 M=M+1
-//push constant
- @892 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@892
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
-//push constant
- @891 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@891
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //JGE
 @SP
@@ -150,21 +150,21 @@ M=0
 (INC_STACK_POINTER_LT1)
 @SP
 M=M+1
-//push constant
- @891 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@891
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
-//push constant
- @892 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@892
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //JGE
 @SP
@@ -187,21 +187,21 @@ M=0
 (INC_STACK_POINTER_LT2)
 @SP
 M=M+1
-//push constant
- @891 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@891
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
-//push constant
- @891 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@891
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //JGE
 @SP
@@ -224,21 +224,21 @@ M=0
 (INC_STACK_POINTER_LT3)
 @SP
 M=M+1
-//push constant
- @32767 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@32767
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
-//push constant
- @32766 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@32766
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //JLE
 @SP
@@ -261,21 +261,21 @@ M=0
 (INC_STACK_POINTER_GT1)
 @SP
 M=M+1
-//push constant
- @32766 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@32766
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
-//push constant
- @32767 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@32767
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //JLE
 @SP
@@ -298,21 +298,21 @@ M=0
 (INC_STACK_POINTER_GT2)
 @SP
 M=M+1
-//push constant
- @32766 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@32766
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
-//push constant
- @32766 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@32766
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //JLE
 @SP
@@ -335,94 +335,94 @@ M=0
 (INC_STACK_POINTER_GT3)
 @SP
 M=M+1
-//push constant
- @57 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@57
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
-//push constant
- @31 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@31
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
-//push constant
- @53 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+//pushconstant
+@53
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //add
- @SP
- AM=M-1
- D=M
- @SP
- AM=M-1
- M=M+D
- @SP
- M=M+1
-//push constant
- @112 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+@SP
+AM=M-1
+D=M
+@SP
+AM=M-1
+M=M+D
+@SP
+M=M+1
+//pushconstant
+@112
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //sub
- @SP
- AM=M-1
- D=M
- @SP
- AM=M-1
- M=M-D
- @SP
- M=M+1
+@SP
+AM=M-1
+D=M
+@SP
+AM=M-1
+M=M-D
+@SP
+M=M+1
 //neg
- @SP
- AM=M-1
- M=-M
- @SP
- M=M+1
+@SP
+AM=M-1
+M=-M
+@SP
+M=M+1
 //and
- @SP
- AM=M-1
- D=M
- @SP
- AM=M-1
- M=M&D
- @SP
- M=M+1
-//push constant
- @82 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+@SP
+AM=M-1
+D=M
+@SP
+AM=M-1
+M=M&D
+@SP
+M=M+1
+//pushconstant
+@82
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //or
- @SP
- AM=M-1
- D=M
- @SP
- AM=M-1
- M=M|D
- @SP
- M=M+1
+@SP
+AM=M-1
+D=M
+@SP
+AM=M-1
+M=M|D
+@SP
+M=M+1
 //not
- @SP
- AM=M-1
- M=!M
- @SP
- M=M+1
+@SP
+AM=M-1
+M=!M
+@SP
+M=M+1
 (INFINITE_LOOP)
 @INFINITE_LOOP
 0;JMP
