@@ -59,7 +59,6 @@ for file in vmfiles:
             codeObj.writeCall(arg1,arg2)
         else: # arithmetic command detected
             codeObj.writeArithmetic(parseObj.curInstruction) # translate an arithmetic command
-        print('{} Command: {}, Type: {}'.format(parseObj.curIndex, parseObj.curInstruction,comType))
     if doInfiniteLoop:
         codeObj.infiniteLoop()
     codeObj.file.close()

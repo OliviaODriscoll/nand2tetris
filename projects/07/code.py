@@ -194,8 +194,6 @@ class CodeWriter():
 
     def writeCall(self,fName, nArgs):
         self.callCount+=1
-        print(self.callCount)
-        print(str(self.callCount))
         self.file.write(
             f'@RET_ADDRESS.{str(self.callCount)}\n'+
             'D=A\n'+
