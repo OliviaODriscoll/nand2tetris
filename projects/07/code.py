@@ -1,8 +1,8 @@
 class CodeWriter():
 
-    def __init__(self, path):
+    def __init__(self, outputFilePath,file,doBootstrap):
         # open output file for writing (the file is connected to the object as a field)
-        self.file = open(path, 'w')
+        self.file = open(outputFilePath, 'w')
         self.SP = 256  # set the initial stack-pointer address
         # assembly commands to set SP to 256 initially (SP is register 0 in RAM)
         self.file.write("@256\n")  # set A-register to 256
@@ -10,10 +10,17 @@ class CodeWriter():
         self.file.write("@SP\n")   # set A-register to 0
         # set SP-register (ie. register 0) to D-register
         self.file.write("M=D\n")
-        self.root = path[:-4].split('/')[-1]
+        self.root = outputFilePath[:-4].split('/')[-1]
+
+        self.labelNumber = 0
 
         self.arithmeticOperationCount = {
             'eq': {'count': 0}, 'lt': {'count': 0}, 'gt': {'count': 0}}
+
+        self.callCount = 0
+
+        if doBootstrap:
+            self.writeInit()
 
     def writeLabel(self, label):
         self.file.write(f"//label\n ({str(label).upper()})\n")
@@ -22,7 +29,8 @@ class CodeWriter():
         self.file.write(f"//goto\n @{str(label).upper()}\n 0;JMP\n")
 
     def writeIf(self, label):
-        self.file.write(f'//if\n @SP\n AM=M-1\n @{str(label).upper()}\n D;JNE\n')
+        self.file.write(
+            f'//if\n @SP\n AM=M-1\n @{str(label).upper()}\n D;JNE\n')
 
     def writePushPop(self, commandType, segment, index=0):
         """
@@ -183,6 +191,108 @@ class CodeWriter():
             elif operation == "gt":
                 self.file.write(
                     f"{self.arithmeticStarting2(labelName,'JLE')}")
+
+    def writeCall(self,fName, nArgs):
+        self.callCount+=1
+        print(self.callCount)
+        print(str(self.callCount))
+        self.file.write(
+            f'@RET_ADDRESS.{str(self.callCount)}\n'+
+            'D=A\n'+
+            '@SP\n'+
+            'A=M\n'+
+            'M=D\n'+
+            '@SP\n'+
+            'M=M+1\n')
+        self.writePushPop('C_PUSH','local')
+        self.writePushPop('C_PUSH','argument')
+        self.writePushPop('C_PUSH','this')
+        self.writePushPop('C_PUSH','that')
+        self.file.write('@SP\n'+
+            'D=M\n'+
+            f'@{nArgs}\n'+
+            'D=D-A\n'+
+            '@5\n'+
+            'D=D-A\n'+
+            '@ARG\n'+
+            'M=D\n'+
+            '@SP\n'+
+            'D=M\n'+
+            '@LCL\n'+
+            'M=D\n'+
+            f'@{fName}\n'+
+            '0;JMP\n'+
+            f'(RET_ADDRESS.{self.callCount})\n')
+
+
+    def writeFunction(self, functionName, nVars):
+        self.file.write(f"({functionName})")
+        for i in range(int(nVars)):
+            self.writePushPop("C_PUSH", "constant", 0)
+
+    def writeReturn(self):
+        self.file.write(
+"""
+//return
+@LCL 
+D=M 
+@FRAME 
+M=D 
+@5 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@RETURN 
+M=D 
+@SP 
+A=M-1 
+D=M 
+@ARG 
+A=M 
+M=D 
+@ARG 
+D=M+1 
+@SP 
+M=D 
+@1 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@THAT 
+M=D 
+@2 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@THIS 
+M=D 
+@3 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@ARG 
+M=D 
+@4 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@LCL 
+M=D 
+@RETURN 
+A=M 
+0;JMP\n""")
+
+    def writeInit(self):
+        self.file.write('@256\n')
+        self.file.write('D=A\n')
+        self.file.write('@SP\n')
+        self.file.write('M=D\n')
+        self.writeCall('Sys.init', 0)      # call Sys.init
 
     def infiniteLoop(self):
         """

@@ -1,0 +1,401 @@
+@256
+D=A
+@SP
+M=D
+@256
+D=A
+@SP
+M=D
+@RET_ADDRESS.1
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+//local push
+ @0
+ D=A
+ @LCL
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//argument push
+ @0
+ D=A
+ @ARG
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//this push
+ @0
+ D=A
+ @THIS
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//that push
+ @0
+ D=A
+ @THAT
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+@SP
+D=M
+@0
+D=D-A
+@5
+D=D-A
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Sys.init
+0;JMP
+(RET_ADDRESS.1)
+(Sys.init)//push constant
+ @6 
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//push constant
+ @8 
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+@RET_ADDRESS.2
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+//local push
+ @0
+ D=A
+ @LCL
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//argument push
+ @0
+ D=A
+ @ARG
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//this push
+ @0
+ D=A
+ @THIS
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//that push
+ @0
+ D=A
+ @THAT
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+@SP
+D=M
+@2
+D=D-A
+@5
+D=D-A
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Class1.set
+0;JMP
+(RET_ADDRESS.2)
+//temp pop
+ @0 // Dumps the return value
+ D=A
+ @5
+ D=A+D
+ @R13
+ M=D
+ @SP
+ AM=M-1
+ D=M
+ @R13
+ A=M
+ M=D
+//push constant
+ @23 
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//push constant
+ @15 
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+@RET_ADDRESS.3
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+//local push
+ @0
+ D=A
+ @LCL
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//argument push
+ @0
+ D=A
+ @ARG
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//this push
+ @0
+ D=A
+ @THIS
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//that push
+ @0
+ D=A
+ @THAT
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+@SP
+D=M
+@2
+D=D-A
+@5
+D=D-A
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Class2.set
+0;JMP
+(RET_ADDRESS.3)
+//temp pop
+ @0 // Dumps the return value
+ D=A
+ @5
+ D=A+D
+ @R13
+ M=D
+ @SP
+ AM=M-1
+ D=M
+ @R13
+ A=M
+ M=D
+@RET_ADDRESS.4
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+//local push
+ @0
+ D=A
+ @LCL
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//argument push
+ @0
+ D=A
+ @ARG
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//this push
+ @0
+ D=A
+ @THIS
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//that push
+ @0
+ D=A
+ @THAT
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+@SP
+D=M
+@0
+D=D-A
+@5
+D=D-A
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Class1.get
+0;JMP
+(RET_ADDRESS.4)
+@RET_ADDRESS.5
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+//local push
+ @0
+ D=A
+ @LCL
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//argument push
+ @0
+ D=A
+ @ARG
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//this push
+ @0
+ D=A
+ @THIS
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//that push
+ @0
+ D=A
+ @THAT
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+@SP
+D=M
+@0
+D=D-A
+@5
+D=D-A
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Class2.get
+0;JMP
+(RET_ADDRESS.5)
+//label
+ (WHILE)
+//goto
+ @WHILE
+ 0;JMP
