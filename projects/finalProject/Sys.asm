@@ -1,0 +1,338 @@
+@256
+D=A
+@SP
+M=D
+@256
+D=A
+@SP
+M=D
+@RET_ADDRESS.1
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+//local push
+ @0
+ D=A
+ @LCL
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//argument push
+ @0
+ D=A
+ @ARG
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//this push
+ @0
+ D=A
+ @THIS
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//that push
+ @0
+ D=A
+ @THAT
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+@SP
+D=M
+@0
+D=D-A
+@5
+D=D-A
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Sys.init
+0;JMP
+(RET_ADDRESS.1)
+(Sys.init)//push constant
+ @4500 
+D=A//pointer pop
+ @0
+ D=A
+ @3
+ D=A+D
+ @R13
+ M=D
+ @SP
+ AM=M-1
+ D=M
+ @R13
+ A=M
+ M=D
+//push constant
+ @4501 
+D=A//pointer pop
+ @1
+ D=A
+ @3
+ D=A+D
+ @R13
+ M=D
+ @SP
+ AM=M-1
+ D=M
+ @R13
+ A=M
+ M=D
+//push constant
+ @12 
+D=A//static pop
+ @SP
+ AM=M-1
+ D=M
+ @Sys.0
+ M=D
+//push constant
+ @4 
+D=A//static pop
+ @SP
+ AM=M-1
+ D=M
+ @Sys.1
+ M=D
+//static push
+ @Sys.0
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//static push
+ @Sys.1
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+@RET_ADDRESS.2
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+//local push
+ @0
+ D=A
+ @LCL
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//argument push
+ @0
+ D=A
+ @ARG
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//this push
+ @0
+ D=A
+ @THIS
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//that push
+ @0
+ D=A
+ @THAT
+ A=M+D
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+@SP
+D=M
+@2
+D=D-A
+@5
+D=D-A
+@ARG
+M=D
+@SP
+D=M
+@LCL
+M=D
+@Mult.mult
+0;JMP
+(RET_ADDRESS.2)
+//static push
+ @Sys.0
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//temp pop
+ @0
+ D=A
+ @5
+ D=A+D
+ @R13
+ M=D
+ @SP
+ AM=M-1
+ D=M
+ @R13
+ A=M
+ M=D
+//static push
+ @Sys.1
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//temp pop
+ @1
+ D=A
+ @5
+ D=A+D
+ @R13
+ M=D
+ @SP
+ AM=M-1
+ D=M
+ @R13
+ A=M
+ M=D
+//temp pop
+ @2
+ D=A
+ @5
+ D=A+D
+ @R13
+ M=D
+ @SP
+ AM=M-1
+ D=M
+ @R13
+ A=M
+ M=D
+//static push
+ @Sys.0
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//static push
+ @Sys.1
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//add
+ @SP
+ AM=M-1
+ D=M
+ @SP
+ AM=M-1
+ M=M+D
+ @SP
+ M=M+1
+//this pop
+ @0
+ D=A
+ @THIS
+ D=M+D
+ @R13
+ M=D
+ @SP
+ AM=M-1
+ D=M
+ @R13
+ A=M
+ M=D
+//static push
+ @Sys.0
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//static push
+ @Sys.1
+ D=M
+ @SP
+ A=M
+ M=D
+ @SP
+ M=M+1
+//sub
+ @SP
+ AM=M-1
+ D=M
+ @SP
+ AM=M-1
+ M=M-D
+ @SP
+ M=M+1
+//that pop
+ @0
+ D=A
+ @THAT
+ D=M+D
+ @R13
+ M=D
+ @SP
+ AM=M-1
+ D=M
+ @R13
+ A=M
+ M=D
+//label
+ (ENDLOOP)
+//goto
+ @ENDLOOP
+ 0;JMP

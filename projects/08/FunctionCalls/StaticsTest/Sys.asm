@@ -6,12 +6,13 @@ M=D
 D=A
 @SP
 M=D
-@RET_ADDRESS.1
-D=A
-@SP
-A=M
-M=D
-@SP
+//push constant
+ @RET_ADDRESS.1 
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
 M=M+1
 //local push
  @0
@@ -88,12 +89,13 @@ A=M
 M=D 
 @SP 
 M=M+1
-@RET_ADDRESS.2
-D=A
-@SP
-A=M
-M=D
-@SP
+//push constant
+ @RET_ADDRESS.2 
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
 M=M+1
 //local push
  @0
@@ -183,12 +185,13 @@ A=M
 M=D 
 @SP 
 M=M+1
-@RET_ADDRESS.3
-D=A
-@SP
-A=M
-M=D
-@SP
+//push constant
+ @RET_ADDRESS.3 
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
 M=M+1
 //local push
  @0
@@ -262,12 +265,13 @@ M=D
  @R13
  A=M
  M=D
-@RET_ADDRESS.4
-D=A
-@SP
-A=M
-M=D
-@SP
+//push constant
+ @RET_ADDRESS.4 
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
 M=M+1
 //local push
  @0
@@ -328,12 +332,13 @@ M=D
 @Class1.get
 0;JMP
 (RET_ADDRESS.4)
-@RET_ADDRESS.5
-D=A
-@SP
-A=M
-M=D
-@SP
+//push constant
+ @RET_ADDRESS.5 
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
 M=M+1
 //local push
  @0

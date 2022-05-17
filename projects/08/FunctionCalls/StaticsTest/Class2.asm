@@ -6,12 +6,13 @@ M=D
 D=A
 @SP
 M=D
-@RET_ADDRESS.1
-D=A
-@SP
-A=M
-M=D
-@SP
+//push constant
+ @RET_ADDRESS.1 
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
 M=M+1
 //local push
  @0

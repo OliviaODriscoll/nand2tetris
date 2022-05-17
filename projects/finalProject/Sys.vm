@@ -1,0 +1,40 @@
+function Sys.init 0
+
+// initialize THIS and THAT base addresses
+push constant 4500
+pop pointer 0
+push constant 4501
+pop pointer 1 
+
+// create two static variables to report various properties
+push constant 12
+pop static 0
+push constant 4
+pop static 1
+
+// call Mult.mult using our two static variables as arguments
+push static 0
+push static 1
+call Mult.mult 2
+
+// move multiplication question and answer into temp segment
+push static 0
+pop temp 0
+push static 1
+pop temp 1
+pop temp 2
+
+// store the sum of our static variables in THIS
+push static 0
+push static 1
+add
+pop this 0 
+
+// store the difference of our static variables in THAT
+push static 0
+push static 1
+sub
+pop that 0
+
+label ENDLOOP
+goto ENDLOOP

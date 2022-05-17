@@ -2,7 +2,7 @@
 D=A
 @SP
 M=D
-//pushconstant
+//push constant
 @17
 D=A
 @SP
@@ -10,7 +10,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @17
 D=A
 @SP
@@ -39,7 +39,7 @@ M=0
 (INC_STACK_POINTER_EQ1)
 @SP
 M=M+1
-//pushconstant
+//push constant
 @17
 D=A
 @SP
@@ -47,7 +47,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @16
 D=A
 @SP
@@ -76,7 +76,7 @@ M=0
 (INC_STACK_POINTER_EQ2)
 @SP
 M=M+1
-//pushconstant
+//push constant
 @16
 D=A
 @SP
@@ -84,7 +84,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @17
 D=A
 @SP
@@ -113,7 +113,7 @@ M=0
 (INC_STACK_POINTER_EQ3)
 @SP
 M=M+1
-//pushconstant
+//push constant
 @892
 D=A
 @SP
@@ -121,7 +121,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @891
 D=A
 @SP
@@ -150,7 +150,7 @@ M=0
 (INC_STACK_POINTER_LT1)
 @SP
 M=M+1
-//pushconstant
+//push constant
 @891
 D=A
 @SP
@@ -158,7 +158,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @892
 D=A
 @SP
@@ -187,7 +187,7 @@ M=0
 (INC_STACK_POINTER_LT2)
 @SP
 M=M+1
-//pushconstant
+//push constant
 @891
 D=A
 @SP
@@ -195,7 +195,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @891
 D=A
 @SP
@@ -224,7 +224,7 @@ M=0
 (INC_STACK_POINTER_LT3)
 @SP
 M=M+1
-//pushconstant
+//push constant
 @32767
 D=A
 @SP
@@ -232,7 +232,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @32766
 D=A
 @SP
@@ -261,7 +261,7 @@ M=0
 (INC_STACK_POINTER_GT1)
 @SP
 M=M+1
-//pushconstant
+//push constant
 @32766
 D=A
 @SP
@@ -269,7 +269,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @32767
 D=A
 @SP
@@ -298,7 +298,7 @@ M=0
 (INC_STACK_POINTER_GT2)
 @SP
 M=M+1
-//pushconstant
+//push constant
 @32766
 D=A
 @SP
@@ -306,7 +306,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @32766
 D=A
 @SP
@@ -335,7 +335,7 @@ M=0
 (INC_STACK_POINTER_GT3)
 @SP
 M=M+1
-//pushconstant
+//push constant
 @57
 D=A
 @SP
@@ -343,7 +343,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @31
 D=A
 @SP
@@ -351,7 +351,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @53
 D=A
 @SP
@@ -368,7 +368,7 @@ AM=M-1
 M=M+D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @112
 D=A
 @SP
@@ -400,7 +400,7 @@ AM=M-1
 M=M&D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @82
 D=A
 @SP
@@ -423,6 +423,3 @@ AM=M-1
 M=!M
 @SP
 M=M+1
-(INFINITE_LOOP)
-@INFINITE_LOOP
-0;JMP

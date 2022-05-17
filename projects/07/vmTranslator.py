@@ -4,15 +4,15 @@ from code import CodeWriter
 import os
 
 ### define a path to the file you want to translate ###
-basepath = 'G:/My Drive/2021-22/ICS4U/nand2tetris/projects/08/' # project 07 folder
-name = "StaticsTest"
-folder = f'FunctionCalls/{name}/' # test folder
+basepath = 'G:/My Drive/2021-22/ICS4U/nand2tetris/projects/07/'
+name = "StackTest"
+folder = f'StackArithmetic/{name}/' # test folder
 file = f'{name}.vm' # test program
 
-inputFilePath = basepath+folder+file # full path to file you want to translate (input file)
+inputFilePath = os.path.join(basepath,folder,file) # full path to file you want to translate (input file)
 outputFilePath = inputFilePath[:-3]+'.asm' # full path to output file
 ########## define asmfile options #######
-doBootStrap = True
+doBootStrap = False
 doInfiniteLoop = False
 
 ############ search folder for .vm files ######
@@ -58,7 +58,7 @@ for file in vmfiles:
         elif comType=="C_CALL":
             codeObj.writeCall(arg1,arg2)
         else: # arithmetic command detected
-            codeObj.writeArithmetic(parseObj.curInstruction) # translate an arithmetic command
+            codeObj.getArithmeticInstruction(parseObj.curInstruction) # translate an arithmetic command
     if doInfiniteLoop:
         codeObj.infiniteLoop()
     codeObj.file.close()
