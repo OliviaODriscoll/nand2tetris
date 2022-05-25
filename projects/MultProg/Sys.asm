@@ -74,7 +74,13 @@ M=D
 (RET_ADDRESS.1)
 (Sys.init)//push constant
  @4500 
-D=A//pointer pop
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//pointer pop
  @0
  D=A
  @3
@@ -89,7 +95,13 @@ D=A//pointer pop
  M=D
 //push constant
  @4501 
-D=A//pointer pop
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//pointer pop
  @1
  D=A
  @3
@@ -104,7 +116,13 @@ D=A//pointer pop
  M=D
 //push constant
  @12 
-D=A//static pop
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//static pop
  @SP
  AM=M-1
  D=M
@@ -112,7 +130,13 @@ D=A//static pop
  M=D
 //push constant
  @4 
-D=A//static pop
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//static pop
  @SP
  AM=M-1
  D=M

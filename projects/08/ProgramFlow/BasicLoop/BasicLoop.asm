@@ -1,8 +1,9 @@
+/// COMPARISON ENDED SUCCESSFULLY 05/23
 @256
 D=A
 @SP
 M=D
-//pushconstant
+//push constant
 @0
 D=A
 @SP
@@ -10,22 +11,31 @@ A=M
 M=D
 @SP
 M=M+1
-//localpop
-@0//initializessum=0
+//local pop
+@0         // initializes sum = 0
 D=A
 @LCL
-D=M+D
-@R13
+A=M
+D=D+A
+@LCL
 M=D
 @SP
-AM=M-1
-D=M
-@R13
+M=M-1
 A=M
+D=M
+@LCL
+A=M
+M=D
+@0         // initializes sum = 0
+D=A
+@LCL
+A=M
+D=A-D
+@LCL
 M=D
 //label
 (LOOP_START)
-//argumentpush
+//argument push
 @0
 D=A
 @ARG
@@ -36,12 +46,12 @@ A=M
 M=D
 @SP
 M=M+1
-//localpush
+//local push
 @0
 D=A
 @LCL
-A=M+D
-D=M
+ A=M+D
+ D=M
 @SP
 A=M
 M=D
@@ -56,20 +66,29 @@ AM=M-1
 M=M+D
 @SP
 M=M+1
-//localpop
-@0	//sum=sum+counter
+//local pop
+@0	        // sum = sum + counter
 D=A
 @LCL
-D=M+D
-@R13
+A=M
+D=D+A
+@LCL
 M=D
 @SP
-AM=M-1
+M=M-1
+A=M
 D=M
-@R13
+@LCL
 A=M
 M=D
-//argumentpush
+@0	        // sum = sum + counter
+D=A
+@LCL
+A=M
+D=A-D
+@LCL
+M=D
+//argument push
 @0
 D=A
 @ARG
@@ -80,7 +99,7 @@ A=M
 M=D
 @SP
 M=M+1
-//pushconstant
+//push constant
 @1
 D=A
 @SP
@@ -97,8 +116,8 @@ AM=M-1
 M=M-D
 @SP
 M=M+1
-//argumentpop
-@0//counter--
+//argument pop
+@0      // counter--
 D=A
 @ARG
 D=M+D
@@ -109,8 +128,7 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D
-//argumentpush
+M=D//argument push
 @0
 D=A
 @ARG
@@ -126,17 +144,14 @@ M=M+1
 AM=M-1
 @LOOP_START
 D;JNE
-//localpush
+//local push
 @0
 D=A
 @LCL
-A=M+D
-D=M
+ A=M+D
+ D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-(INFINITE_LOOP)
-@INFINITE_LOOP
-0;JMP

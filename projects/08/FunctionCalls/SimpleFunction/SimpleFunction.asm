@@ -1,88 +1,101 @@
+/// COMPARISON ENDED SUCCESSFULLY 05/23
 @256
 D=A
 @SP
 M=D
 (SimpleFunction.test)//push constant
- @0 
-D=A//push constant
- @0 
-D=A//local push
- @0
- D=A
- @LCL
- A=M+D
- D=M
- @SP
- A=M
- M=D
- @SP
- M=M+1
+@0
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+//push constant
+@0
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
 //local push
- @1
- D=A
- @LCL
+@0
+D=A
+@LCL
  A=M+D
  D=M
- @SP
- A=M
- M=D
- @SP
- M=M+1
-//add
- @SP
- AM=M-1
+@SP
+A=M
+M=D
+@SP
+M=M+1
+//local push
+@1
+D=A
+@LCL
+ A=M+D
  D=M
- @SP
- AM=M-1
- M=M+D
- @SP
- M=M+1
+@SP
+A=M
+M=D
+@SP
+M=M+1
+//add
+@SP
+AM=M-1
+D=M
+@SP
+AM=M-1
+M=M+D
+@SP
+M=M+1
 //not
- @SP
- AM=M-1
- M=!M
- @SP
- M=M+1
+@SP
+AM=M-1
+M=!M
+@SP
+M=M+1
 //argument push
- @0
- D=A
- @ARG
- A=M+D
- D=M
- @SP
- A=M
- M=D
- @SP
- M=M+1
+@0
+D=A
+@ARG
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
 //add
- @SP
- AM=M-1
- D=M
- @SP
- AM=M-1
- M=M+D
- @SP
- M=M+1
+@SP
+AM=M-1
+D=M
+@SP
+AM=M-1
+M=M+D
+@SP
+M=M+1
 //argument push
- @1
- D=A
- @ARG
- A=M+D
- D=M
- @SP
- A=M
- M=D
- @SP
- M=M+1
+@1
+D=A
+@ARG
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
 //sub
- @SP
- AM=M-1
- D=M
- @SP
- AM=M-1
- M=M-D
- @SP
- M=M+1
+@SP
+AM=M-1
+D=M
+@SP
+AM=M-1
+M=M-D
+@SP
+M=M+1
 //return
 @LCL
 D=M

@@ -16,32 +16,54 @@ class CodeWriter():
 
         self.arithmeticOperationCount = {
             'eq': {'count': 0}, 'lt': {'count': 0}, 'gt': {'count': 0}}
-        
-        self.jumpDirectives = {'lt':'JGE', 'eq':'JNE','gt':'JLE'}
 
-        self.callCount = 0
+        self.jumpDirectives = {'lt': 'JGE', 'eq': 'JNE', 'gt': 'JLE'}
+
+        self.returnAddressCount = 0
 
         if doBootstrap:
             self.writeInit()
 
     def writeLabel(self, label):
+        """ injects label into assembly stream 
+
+        Args:
+            label (str): label name to be written
+        """
         self.writeComment("label")
-        self.file.write(f"({str(label).upper()})\n")
+        self.file.write(f"({str(label)})\n")
 
     def writeGoto(self, label):
+        """ effects unconditional goto operation, causing execution to continue from the location marked by the label
+
+        Args:
+            label (str): label to go to
+        """
         self.writeComment("goto")
         self.file.write(
-            f"@{str(label).upper()}\n"+
+            f"@{str(label)}\n" +
             "0;JMP\n")
 
     def writeIf(self, label):
+        """effects conditional goto operation. stack's topmost value is popped, 
+        if val is not zero, execution continues from the location marked by the label, 
+        otherwise execution continues from the next command in the program
+
+        Args:
+            label (str): label to go to if condition is met
+        """
         self.writeComment("if")
         self.decSP()
         self.file.write(
-            f"@{str(label).upper()}\n"+
+            f"@{str(label)}\n" +
             "D;JNE\n")
 
     def loadValInD(self, value):
+        """loads the specified value in the d register
+
+        Args:
+            value (int): value to load in register
+        """
         self.file.write(
             # select constant
             f"@{value}\n" +
@@ -49,6 +71,8 @@ class CodeWriter():
             "D=A\n")
 
     def putDOnTopOfStack(self):
+        """ helper method that puts the value in the d register on top of the stack
+        """
         self.file.write(
             # load sp
             "@SP\n" +
@@ -58,32 +82,42 @@ class CodeWriter():
             "M=D\n")
 
     def incSP(self):
+        """ helper method to increase SP by 1
+        """
         self.file.write(
             # select sp
             "@SP\n" +
             # increase by 1
             "M=M+1\n")
-    
+
     def decSP(self):
-        #select sp
+        """ decreases SP by 1 
+        """
+        # select sp
         self.file.write(
-            "@SP\n"+
+            "@SP\n" +
             # dec sp
             "AM=M-1\n"
         )
 
-    
     def putTopValInD(self):
+        """ helper method to put the top stack value in the d register
+        """
         self.file.write(
             # load sp
-            "@SP\n"+
+            "@SP\n" +
             # dec sp
-            "AM=M-1\n"+
-            #put val in D
+            "AM=M-1\n" +
+            # put val in D
             "D=M\n"
         )
 
     def writeComment(self, comment):
+        """ inject a comment into assembly stream to facilitate debugging
+
+        Args:
+            comment (str): comment to be injected
+        """
         self.file.write(f"//{comment}\n")
 
     def writePushPop(self, commandType, segment, index=0):
@@ -165,7 +199,7 @@ class CodeWriter():
                     "@3\n" +
                     "A=A+D\n" +
                     "D=M\n")
-                self.putDOnTopOfStack
+                self.putDOnTopOfStack()
                 self.incSP()
             self.SP += 1  # increment SP by 1 at the end of a PUSH
 
@@ -173,27 +207,27 @@ class CodeWriter():
             if segment in ['R13', 'R14', 'R15']:
                 self.putTopValInD()
                 self.file.write(
-                    f"@{segment}\n"+
+                    f"@{segment}\n" +
                     "M=D\n")
             if segment == "static":
                 self.writeComment("static pop")
                 self.putTopValInD()
                 self.file.write(
-                    f"@{self.root}.{index}\n"+
+                    f"@{self.root}.{index}\n" +
                     "M=D\n")
             elif segment in ["this", "that"]:
                 self.writeComment(f"{segment} pop")
                 self.file.write(
-                    f"@{index}\n"+
-                    "D=A\n"+
-                    f"@{segment.upper()}\n"+
-                    "D=M+D\n"+
-                    "@R13\n"+
+                    f"@{index}\n" +
+                    "D=A\n" +
+                    f"@{segment.upper()}\n" +
+                    "D=M+D\n" +
+                    "@R13\n" +
                     "M=D\n")
                 self.putTopValInD()
                 self.file.write(
-                    "@R13\n"+
-                    "A=M\n"+
+                    "@R13\n" +
+                    "A=M\n" +
                     "M=D")
 
             elif segment == "that":
@@ -202,64 +236,80 @@ class CodeWriter():
             elif segment == "argument":
                 self.writeComment("argument pop")
                 self.file.write(
-                    f"@{index}\n"+
-                    "D=A\n"+
-                    "@ARG\n"+
-                    "D=M+D\n"+
-                    "@R13\n"+
+                    f"@{index}\n" +
+                    "D=A\n" +
+                    "@ARG\n" +
+                    "D=M+D\n" +
+                    "@R13\n" +
                     "M=D\n")
                 self.putTopValInD()
                 self.file.write(
-                    "@R13\n"+
-                    "A=M\n"+
+                    "@R13\n" +
+                    "A=M\n" +
                     "M=D")
             elif segment == "local":
                 self.writeComment("local pop")
                 self.file.write(
-                    f"@{index}\n"+
-                    "D=A\n"+
-                    "@LCL\n"+
-                    "D=M+D\n"+
-                    "@R13\n"+
-                    "M=D\n")
-                self.putTopValInD()
-                self.file.write(
-                    "@R13\n"+
-                    "A=M\n"+
-                    "M=D")
+                    f"@{index}\n" +
+                    'D=A\n' +
+                    '@LCL\n' +
+                    'A=M\n' +
+                    'D=D+A\n' +
+                    '@LCL\n' +
+                    'M=D\n' +
+                    '@SP\n' +
+                    'M=M-1\n' +
+                    'A=M\n' +
+                    'D=M\n' +
+                    '@LCL\n' +
+                    'A=M\n' +
+                    'M=D\n' +
+                    f'@{index}\n' +
+                    'D=A\n' +
+                    '@LCL\n' +
+                    'A=M\n' +
+                    'D=A-D\n' +
+                    '@LCL\n' +
+                    'M=D\n')
+
             elif segment == "pointer":
                 self.writeComment("pointer pop")
                 self.file.write(
-                    f"@{index}\n"+
-                    "D=A\n"+
-                    "@3\n"+
-                    "D=A+D\n"+
-                    "@R13\n"+
+                    f"@{index}\n" +
+                    "D=A\n" +
+                    "@3\n" +
+                    "D=A+D\n" +
+                    "@R13\n" +
                     "M=D\n")
-                self.putTopValInD
+                self.putTopValInD()
                 self.file.write(
-                    "@R13\n"+
-                    "A=M\n"+
+                    "@R13\n" +
+                    "A=M\n" +
                     "M=D\n")
             elif segment == "temp":
                 self.writeComment("temp pop")
                 self.file.write(
-                    f"@{index}\n"+
-                    "D=A\n"+
-                    "@5\n"+
-                    "D=A+D\n"+
-                    "@R13\n"+
+                    f"@{index}\n" +
+                    "D=A\n" +
+                    "@5\n" +
+                    "D=A+D\n" +
+                    "@R13\n" +
                     "M=D\n")
                 self.putTopValInD()
                 self.file.write(
-                    "@R13\n"+
-                    "A=M\n"+
+                    "@R13\n" +
+                    "A=M\n" +
                     "M=D\n")
 
             self.SP -= 1  # decrement SP by 1 at the end of a POP
         return
 
     def writeArithmeticComparison(self, operation):
+        """"compare the top two stack values based on the given arithmetic comparison operation 
+
+        Args:
+            operation (str): arithmetic operation to be performed
+        """
         # generate label name
         counter = self.arithmeticOperationCount[operation]
         counter['count'] += 1
@@ -271,7 +321,7 @@ class CodeWriter():
         # start writing instructions
         self.writeComment(f"{jumpDirective}")
         self.decSP()
-         # set D to top of stack
+        # set D to top of stack
         self.file.write('D=M\n')
         self.decSP()
         self.file.write(
@@ -288,7 +338,7 @@ class CodeWriter():
             # set it to -1 for true
             'M=-1\n' +
             # load inc stack pointer
-            f'@INC_STACK_POINTER_{labelName}\n' +
+            f'@INC_SP_{labelName}\n' +
             # jump unconditionally
             '0;JMP\n' +
             # not true section
@@ -300,51 +350,57 @@ class CodeWriter():
             # set to 0 for false
             'M=0\n' +
             # define inc stack pointer label
-            f'(INC_STACK_POINTER_{labelName})\n')
+            f'(INC_SP_{labelName})\n')
         self.incSP()
-    
-    def writeArithmetic(self, comment, operation, unary=False):
+
+    def writeArithmetic(self, comment, unary=False):
         """
         Performs an arithmetic or logical operation
 
         Parameter:
         operation: a string specifying the operation to be performed ('add','sub','neg','and','or','not','eq','gt','lt')
         """
+        arithmeticInstructionDict = {
+            "add": "M+D", "sub": "M-D", "and": "M&D", "or": "M|D", "not": "!M", "neg": "-M"}
+
         if unary:
             self.writeComment(comment)
             self.decSP()
-            self.file.write(f"M={operation}\n")
+            self.file.write(f"M={arithmeticInstructionDict[comment]}\n")
             self.incSP()
         else:
             self.writeComment(comment)
             self.decSP()
             self.file.write("D=M\n")
             self.decSP()
-            self.file.write(f"M={operation}\n")
+            self.file.write(f"M={arithmeticInstructionDict[comment]}\n")
             self.incSP()
-    
-    def getArithmeticInstruction(self,operation):
-        if operation == "add":
-            self.writeArithmetic(operation,"M+D")
-        elif operation == "sub":
-            self.writeArithmetic(operation,"M-D")
-        elif operation == "and":
-            self.writeArithmetic(operation,"M&D")
-        elif operation == "or":
-            self.writeArithmetic(operation,"M|D")
-        elif operation == "not":
-            self.writeArithmetic(operation,"!M", True)
-        elif operation == "neg":
-            self.writeArithmetic(operation, "-M", True)
-        elif operation in ['lt','eq','gt']:
-            self.writeArithmeticComparison(operation)
 
-   
+    def getArithmeticInstruction(self, operation):
+        """ directs program to appropriate method depending on which operation is prescribed
+
+        Args:
+            operation (str): operation to be performed
+        """
+        if operation == "not" or operation == "neg":
+            self.writeArithmetic(operation, True)
+        elif operation in ['lt', 'eq', 'gt']:
+            self.writeArithmeticComparison(operation)
+        else:
+            self.writeArithmetic(operation)
+
     def writeCall(self, fName, nArgs):
-        self.callCount += 1
+        """writes assembly code that effects the call command
+
+        Args:
+            fName (str): name of function to be called
+            nArgs (int): number of arguments for the function
+        """
+
+        self.returnAddressCount += 1
         self.file.write(
             # put label for return address
-            f'@RET_ADDRESS.{str(self.callCount)}\n' +
+            f'@RET_ADDRESS.{str(self.returnAddressCount)}\n' +
             # get address val
             'D=A\n' +
             # load sp
@@ -365,12 +421,13 @@ class CodeWriter():
         self.file.write(
             # load sp
             '@SP\n' +
+            'M=M+1\n' +
             # get val of sp
             'D=M\n' +
-            # subtract num of arguments from sp
+            # SP-=nArgs
             f'@{nArgs}\n' +
             'D=D-A\n' +
-            # subtract 5 from sp
+            # SP-=5
             '@5\n' +
             'D=D-A\n' +
             # set arg to that
@@ -383,37 +440,51 @@ class CodeWriter():
             'M=D\n')
         self.writeGoto(fName)
         # inject retAddress label to stream
-        self.file.write(f'(RET_ADDRESS.{self.callCount})\n')
+        self.file.write(f'(RET_ADDRESS.{self.returnAddressCount})\n')
 
     def writeFunction(self, functionName, nVars):
+        """writes assembly code that effects the function command
+
+        Args:
+            functionName (str): name of function
+            nVars (int): number of arguments for the function
+        """
         self.file.write(f"({functionName})")
         for i in range(int(nVars)):
             self.writePushPop("C_PUSH", "constant", 0)
 
-    def returnRepeatedCode(self, memorySection, number):
+    def returnRepeatedCode(self, segment, difference):
+        """performs SEGMENT = *(frame - difference)
+
+        Args:
+            segment (str): THAT, THIS, ARG, LCL
+            difference (int): number to subtract from frame address
+        """
         self.file.write(
-            # load delta before frame end
-            f"@{number}\n" +
+            # load difference from frame
+            f"@{difference}\n" +
             # place in D
             "D=A\n" +
             # load frame
             "@R13\n" +
-            # get address value into A
+            # put address val in A
             "A=M-D\n" +
-            # dereference to get value at mem address
+            # get the value at the memory address being pointed to
             "D=M\n" +
             # load LCL
-            f"@{memorySection}\n" +
-            # set value at THAT to D
+            f"@{segment}\n" +
+            # RAM[that] becomes D
             "M=D\n"
         )
 
     def writeReturn(self):
+        """writes assembly code that effects return command
+        """
         self.file.write(
             "//return\n" +
-            # frame = LCL (frame is temp var)
+            # frame = LCL since it is only temp
             "@LCL\n" +
-            # store frame in d
+            # frame in d
             "D=M\n" +
             # temp reg
             "@R13\n" +
@@ -431,10 +502,10 @@ class CodeWriter():
             "D=M\n" +
             # load to temp var
             "@R14\n" +
+            # load to temp var step 2
             "M=D\n" +
             # *ARG = pop()
-            # pop stack
-            "@SP\n" +
+            "@SP\n" +  # pop stack
             # dec addresses & sp
             "A=M-1\n" +
             # store tap stack val in D
@@ -453,9 +524,13 @@ class CodeWriter():
             "@SP\n" +
             # set address to arg+1
             "M=D\n")
+        # THAT = *(frame-1)
         self.returnRepeatedCode("THAT", 1)
+        # THAT = *(frame-2)
         self.returnRepeatedCode("THIS", 2)
+        # ARG = *(frame-3)
         self.returnRepeatedCode("ARG", 3)
+        # LCL = *(frame-4)
         self.returnRepeatedCode("LCL", 4)
         self.file.write(
             # goto retAddress
@@ -466,6 +541,9 @@ class CodeWriter():
             "0;JMP\n")
 
     def writeInit(self):
+        """sets SP to 0 and calls sys.init
+        """
+        self.writeComment("init")
         self.file.write('@256\n')
         self.file.write('D=A\n')
         self.file.write('@SP\n')

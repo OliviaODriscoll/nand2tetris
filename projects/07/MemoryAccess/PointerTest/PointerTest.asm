@@ -3,160 +3,155 @@ D=A
 @SP
 M=D
 //push constant
- @3030 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+@3030
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //pointer pop
- @0
- D=A
- @3
- D=A+D
- @R13
- M=D
- @SP
- AM=M-1
- D=M
- @R13
- A=M
- M=D
+@0
+D=A
+@3
+D=A+D
+@R13
+M=D
+@SP
+AM=M-1
+D=M
+@R13
+A=M
+M=D
 //push constant
- @3040 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+@3040
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //pointer pop
- @1
- D=A
- @3
- D=A+D
- @R13
- M=D
- @SP
- AM=M-1
- D=M
- @R13
- A=M
- M=D
+@1
+D=A
+@3
+D=A+D
+@R13
+M=D
+@SP
+AM=M-1
+D=M
+@R13
+A=M
+M=D
 //push constant
- @32 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+@32
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //this pop
- @2
- D=A
- @THIS
- D=M+D
- @R13
- M=D
- @SP
- AM=M-1
- D=M
- @R13
- A=M
- M=D
-//push constant
- @46 
-D=A 
-@SP 
-A=M 
-M=D 
-@SP 
+@2
+D=A
+@THIS
+D=M+D
+@R13
+M=D
+@SP
+AM=M-1
+D=M
+@R13
+A=M
+M=D//push constant
+@46
+D=A
+@SP
+A=M
+M=D
+@SP
 M=M+1
 //that pop
- @6
- D=A
- @THAT
- D=M+D
- @R13
- M=D
- @SP
- AM=M-1
- D=M
- @R13
- A=M
- M=D
+@6
+D=A
+@THAT
+D=M+D
+@R13
+M=D
+@SP
+AM=M-1
+D=M
+@R13
+A=M
+M=D//pointer push
+@0
+D=A
+@3
+A=A+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
 //pointer push
- @0
- D=A
- @3
- A=A+D
- D=M
- @SP
- A=M
- M=D
- @SP
- M=M+1
-//pointer push
- @1
- D=A
- @3
- A=A+D
- D=M
- @SP
- A=M
- M=D
- @SP
- M=M+1
+@1
+D=A
+@3
+A=A+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
 //add
- @SP
- AM=M-1
- D=M
- @SP
- AM=M-1
- M=M+D
- @SP
- M=M+1
+@SP
+AM=M-1
+D=M
+@SP
+AM=M-1
+M=M+D
+@SP
+M=M+1
 //this push
- @2
- D=A
- @THIS
- A=M+D
- D=M
- @SP
- A=M
- M=D
- @SP
- M=M+1
+@2
+D=A
+@THIS
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
 //sub
- @SP
- AM=M-1
- D=M
- @SP
- AM=M-1
- M=M-D
- @SP
- M=M+1
+@SP
+AM=M-1
+D=M
+@SP
+AM=M-1
+M=M-D
+@SP
+M=M+1
 //that push
- @6
- D=A
- @THAT
- A=M+D
- D=M
- @SP
- A=M
- M=D
- @SP
- M=M+1
+@6
+D=A
+@THAT
+A=M+D
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
 //add
- @SP
- AM=M-1
- D=M
- @SP
- AM=M-1
- M=M+D
- @SP
- M=M+1
-(INFINITE_LOOP)
-@INFINITE_LOOP
-0;JMP
+@SP
+AM=M-1
+D=M
+@SP
+AM=M-1
+M=M+D
+@SP
+M=M+1

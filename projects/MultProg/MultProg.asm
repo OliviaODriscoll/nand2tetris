@@ -74,7 +74,13 @@ M=D
 (RET_ADDRESS.1)
 (Sys.init)//push constant
  @4500 
-D=A//pointer pop
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//pointer pop
  @0
  D=A
  @3
@@ -89,7 +95,13 @@ D=A//pointer pop
  M=D
 //push constant
  @4501 
-D=A//pointer pop
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//pointer pop
  @1
  D=A
  @3
@@ -104,7 +116,13 @@ D=A//pointer pop
  M=D
 //push constant
  @12 
-D=A//static pop
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//static pop
  @SP
  AM=M-1
  D=M
@@ -112,7 +130,13 @@ D=A//static pop
  M=D
 //push constant
  @4 
-D=A//static pop
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//static pop
  @SP
  AM=M-1
  D=M
@@ -412,11 +436,29 @@ M=D
 (RET_ADDRESS.1)
 (Mult.mult)//push constant
  @0 
-D=A//push constant
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//push constant
  @0 
-D=A//push constant
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//push constant
  @4503 
-D=A//pointer pop
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//pointer pop
  @0
  D=A
  @3
@@ -431,7 +473,13 @@ D=A//pointer pop
  M=D
 //push constant
  @4504 
-D=A//pointer pop
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//pointer pop
  @1
  D=A
  @3
@@ -492,7 +540,13 @@ D=A//pointer pop
  M=D
 //push constant
  @1 
-D=A//local push
+D=A 
+@SP 
+A=M 
+M=D 
+@SP 
+M=M+1
+//local push
  @1
  D=A
  @LCL
@@ -689,7 +743,60 @@ M=D
  M=D
  @SP
  M=M+1
-//return@LCLD=M@R13M=D@5D=A@R13A=M-DD=M@R14M=D@SPA=M-1D=M@ARGA=MM=D@ARGD=M+1@SPM=D@1D=A@R13A=M-DD=M@THATM=D@2D=A@R13A=M-DD=M@THISM=D@3D=A@R13A=M-DD=M@ARGM=D@4D=A@R13A=M-DD=M@LCLM=D@R14A=M0;JMP
+
+//return
+@LCL 
+D=M 
+@FRAME 
+M=D 
+@5 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@RETURN 
+M=D 
+@SP 
+A=M-1 
+D=M 
+@ARG 
+A=M 
+M=D 
+@ARG 
+D=M+1 
+@SP 
+M=D 
+@1 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@THAT 
+M=D 
+@2 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@THIS 
+M=D 
+@3 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@ARG 
+M=D 
+@4 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@LCL 
+M=D 
+@RETURN 
+A=M 
+0;JMP
 (Mult.store)//argument push
  @0
  D=A
@@ -762,4 +869,57 @@ M=D
  @R13
  A=M
  M=D
-//return@LCLD=M@R13M=D@5D=A@R13A=M-DD=M@R14M=D@SPA=M-1D=M@ARGA=MM=D@ARGD=M+1@SPM=D@1D=A@R13A=M-DD=M@THATM=D@2D=A@R13A=M-DD=M@THISM=D@3D=A@R13A=M-DD=M@ARGM=D@4D=A@R13A=M-DD=M@LCLM=D@R14A=M0;JMP
+
+//return
+@LCL 
+D=M 
+@FRAME 
+M=D 
+@5 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@RETURN 
+M=D 
+@SP 
+A=M-1 
+D=M 
+@ARG 
+A=M 
+M=D 
+@ARG 
+D=M+1 
+@SP 
+M=D 
+@1 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@THAT 
+M=D 
+@2 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@THIS 
+M=D 
+@3 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@ARG 
+M=D 
+@4 
+D=A 
+@FRAME 
+A=M-D 
+D=M 
+@LCL 
+M=D 
+@RETURN 
+A=M 
+0;JMP

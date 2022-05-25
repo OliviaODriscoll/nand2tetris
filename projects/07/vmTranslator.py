@@ -4,15 +4,17 @@ from code import CodeWriter
 import os
 
 ### define a path to the file you want to translate ###
-basepath = 'G:/My Drive/2021-22/ICS4U/nand2tetris/projects/07/'
-name = "StackTest"
-folder = f'StackArithmetic/{name}/' # test folder
-file = f'{name}.vm' # test program
+# basepath = 'G:/My Drive/2021-22/ICS4U/nand2tetris/projects/08/'
+# name = "StaticsTest" #"StackTest"
+# folder = f"FunctionCalls/{name}/"
+# file = f'{name}.vm' # test program
 
-inputFilePath = os.path.join(basepath,folder,file) # full path to file you want to translate (input file)
-outputFilePath = inputFilePath[:-3]+'.asm' # full path to output file
+### define a path to the folder you want to translate ###
+basepath = 'G:/My Drive/2021-22/ICS4U/nand2tetris/projects/08/'  # project 08 folder
+folder = 'FunctionCalls/FibonacciElement/'  # end folder path with slash
+
 ########## define asmfile options #######
-doBootStrap = False
+doBootStrap = True
 doInfiniteLoop = False
 
 ############ search folder for .vm files ######
@@ -21,62 +23,67 @@ vmfiles = list()
 
 for file in allfiles:
     if file.endswith('.vm'):
-         vmfiles.append(file)
+        vmfiles.append(file)
 
 vmfiles.reverse() # optional, lets you see sys.init at top of output code
 ################################################
 
 for file in vmfiles:
-    inputFilePath = basepath+folder+file # full path to file you want to translate (input file)
-    outputFilePath = inputFilePath[:-3]+'.asm' # full path to output file
+    # full path to file you want to translate (input file)
+    inputFilePath = basepath+folder+file
+    outputFilePath = inputFilePath[:-3]+'.asm'  # full path to output file
 
     ### create an object that has access to input file -- determines commands to be translated ###
-    parseObj = parser(inputFilePath) # invoke the constructor method in the class parse()
+    # invoke the constructor method in the class parse()
+    parseObj = parser(inputFilePath)
 
     ### create an object to serve as our output file (writes translated asm code) ###
-    codeObj = CodeWriter(outputFilePath,file,doBootStrap)
+    codeObj = CodeWriter(outputFilePath, file, doBootStrap)
     ###############################################################
 
     ################ translate code, line by line #################
     while parseObj.hasMoreLines():  # check if there are lines in the input file left to be parsed
-        parseObj.advance() # remove comments, blank lines, and get current instruction
-        comType = parseObj.commandType() # measure command type of current instruction
-        arg1 = parseObj.arg1() # arg1 of command 
-        arg2 = parseObj.arg2() # arg2 of command
-        if comType=="C_PUSH" or comType=="C_POP": # push pop command detected
-            codeObj.writePushPop(comType,arg1,arg2) # translate a push pop command
-        elif comType=='C_LABEL':
+        parseObj.advance()  # remove comments, blank lines, and get current instruction
+        comType = parseObj.commandType()  # measure command type of current instruction
+        arg1 = parseObj.arg1()  # arg1 of command
+        arg2 = parseObj.arg2()  # arg2 of command
+        if comType == "C_PUSH" or comType == "C_POP":  # push pop command detected
+            # translate a push pop command
+            codeObj.writePushPop(comType, arg1, arg2)
+        elif comType == 'C_LABEL':
             codeObj.writeLabel(arg1)
-        elif comType=='C_IF':
+        elif comType == 'C_IF':
             codeObj.writeIf(arg1)
-        elif comType=='C_GOTO':
+        elif comType == 'C_GOTO':
             codeObj.writeGoto(arg1)
-        elif comType=='C_FUNCTION':
-            codeObj.writeFunction(arg1,arg2)
-        elif comType=='C_RETURN':
+        elif comType == 'C_FUNCTION':
+            codeObj.writeFunction(arg1, arg2)
+        elif comType == 'C_RETURN':
             codeObj.writeReturn()
-        elif comType=="C_CALL":
-            codeObj.writeCall(arg1,arg2)
-        else: # arithmetic command detected
-            codeObj.getArithmeticInstruction(parseObj.curInstruction) # translate an arithmetic command
+        elif comType == "C_CALL":
+            codeObj.writeCall(arg1, arg2)
+        else:  # arithmetic command detected
+            # translate an arithmetic command
+            codeObj.getArithmeticInstruction(parseObj.curInstruction)
+        #print('{} Command: {}, Type: {}'.format(parseObj.curIndex, parseObj.curInstruction,comType))
     if doInfiniteLoop:
         codeObj.infiniteLoop()
     codeObj.file.close()
 
 ### build single output file when folder has more than one vm file ###
 
-if len(vmfiles)>1:
+if len(vmfiles) > 1:
     index = 0
     fname = folder[:-1]
-    while index!=-1:
+    while index != -1:
         index = fname.find('/')
-        if index!=-1:
-            fname=fname[index+1:]
-    asmfile = open(basepath+folder+fname+'.asm','w')
+        if index != -1:
+            fname = fname[index+1:]
+    asmfile = open(basepath+folder+fname+'.asm', 'w')
 
     for file in vmfiles:
         afile = basepath+folder+file[:-3]+'.asm'
-        afile = open(afile,'r')
+        afile = open(afile, 'r')
         lines = afile.readlines()
         for line in lines:
             asmfile.write(line)
