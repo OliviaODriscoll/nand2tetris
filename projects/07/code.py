@@ -21,6 +21,8 @@ class CodeWriter():
 
         self.returnAddressCount = 0
 
+        self.curFunction = "boot"
+
         if doBootstrap:
             self.writeInit()
 
@@ -295,7 +297,7 @@ class CodeWriter():
                     f"@{index}\n" +
                     "D=A\n" +
                     "@5\n" +
-                    "D=A+D_push_referenced_address_onto_stack\n" +
+                    "D=A+D\n" +
                     "@R13\n" +
                     "M=D\n")
                 self.putTopValInD()
@@ -392,9 +394,10 @@ class CodeWriter():
         else:
             self.getArithmeticInstruction(operation)
 
+
+    
     def writeCallSegmentPush(self, segment):
         """puts the appropriate segment onto the stack for function call
-
         Args:
             segment (str): segment in mem
         """
@@ -405,6 +408,7 @@ class CodeWriter():
         self.putDOnTopOfStack()
         self.incSP()
 
+
     def writeCall(self, fName, nArgs):
         """writes assembly code that effects the call command
 
@@ -413,9 +417,10 @@ class CodeWriter():
             nArgs (int): number of arguments for the function
         """
         self.returnAddressCount += 1
+        labelName = f"{self.curFunction}{str(self.returnAddressCount)}"
         self.writeComment("call")
         # push return address
-        self.loadValInD(f"RETURN_ADDRESS_{str(self.returnAddressCount)}")
+        self.loadValInD(labelName)
         self.putDOnTopOfStack()
         self.incSP()
         # push lcl, arg, this, that to stack
@@ -444,7 +449,7 @@ class CodeWriter():
             'M=D\n')
         self.writeGoto(fName)
         # inject retAddress label to stream
-        self.file.write(f'(RETURN_ADDRESS_{self.returnAddressCount})\n')
+        self.file.write(f'({labelName})\n')
 
     def writeFunction(self, functionName, nVars):
         """writes assembly code that effects the function command
@@ -453,6 +458,7 @@ class CodeWriter():
             functionName (str): name of function
             nVars (int): number of arguments for the function
         """
+        self.curFunction = functionName
         self.writeComment("function")
         self.file.write(f"({functionName})")
         for i in range(int(nVars)):

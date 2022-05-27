@@ -11,7 +11,7 @@ import os
 
 ### define a path to the folder you want to translate ###
 basepath = 'G:/My Drive/2021-22/ICS4U/nand2tetris/projects/08/' # project 08 folder
-folder = 'FunctionCalls/FibonacciElement/'  # end folder path with slash
+folder = 'FunctionCalls/StaticsTest/'  # end folder path with slash
 
 ########## define asmfile options #######
 doBootStrap = True

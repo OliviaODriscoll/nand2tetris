@@ -4,14 +4,14 @@ D=A
 @SP
 M=D
 //call
-@RET_ADDRESS.1
+@boot1
 D=A
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//local push
+//call push LCL
 @LCL
 D=M
 @SP
@@ -19,7 +19,7 @@ A=M
 M=D
 @SP
 M=M+1
-//argument push
+//call push ARG
 @ARG
 D=M
 @SP
@@ -27,7 +27,7 @@ A=M
 M=D
 @SP
 M=M+1
-//this push
+//call push THIS
 @THIS
 D=M
 @SP
@@ -35,8 +35,7 @@ A=M
 M=D
 @SP
 M=M+1
-//that push done
-//that push
+//call push THAT
 @THAT
 D=M
 @SP
@@ -44,8 +43,6 @@ A=M
 M=D
 @SP
 M=M+1
-//that push done
-@SP
 D=M
 @0
 D=D-A
@@ -60,11 +57,15 @@ M=D
 //goto
 @Sys.init
 0;JMP
-(RET_ADDRESS.1)
+(boot1)
 //vm: function Class2.set 0
+//function
 (Class2.set)//vm: push argument 0
 //argument push
 @ARG
+D=M
+@0
+A=D+A
 D=M
 @SP
 A=M
@@ -81,6 +82,9 @@ M=D
 //vm: push argument 1
 //argument push
 @ARG
+D=M
+@1
+A=D+A
 D=M
 @SP
 A=M
@@ -158,6 +162,7 @@ M=D
 A=M
 0;JMP
 //vm: function Class2.get 0
+//function
 (Class2.get)//vm: push static 0
 //static push
 @Class2.0
@@ -239,7 +244,4 @@ D=M
 M=D
 @RETURN
 A=M
-0;JMP
-(INFINITE_LOOP)
-@INFINITE_LOOP
 0;JMP

@@ -4,7 +4,7 @@ D=A
 @SP
 M=D
 //call
-@RETURN_ADDRESS_1
+@boot1
 D=A
 @SP
 A=M
@@ -57,7 +57,7 @@ M=D
 //goto
 @Sys.init
 0;JMP
-(RETURN_ADDRESS_1)
+(boot1)
 //vm: function Main.fibonacci 0
 //function
 (Main.fibonacci)//vm: push argument 0
@@ -219,7 +219,7 @@ M=M-D
 M=M+1
 //vm: call Main.fibonacci 1
 //call
-@RETURN_ADDRESS_2
+@Main.fibonacci2
 D=A
 @SP
 A=M
@@ -272,7 +272,7 @@ M=D
 //goto
 @Main.fibonacci
 0;JMP
-(RETURN_ADDRESS_2)
+(Main.fibonacci2)
 //vm: push argument 0
 //argument push
 @ARG
@@ -306,7 +306,7 @@ M=M-D
 M=M+1
 //vm: call Main.fibonacci 1
 //call
-@RETURN_ADDRESS_3
+@Main.fibonacci3
 D=A
 @SP
 A=M
@@ -359,7 +359,7 @@ M=D
 //goto
 @Main.fibonacci
 0;JMP
-(RETURN_ADDRESS_3)
+(Main.fibonacci3)
 //vm: add
 //add
 @SP
@@ -430,7 +430,7 @@ D=A
 @SP
 M=D
 //call
-@RETURN_ADDRESS_1
+@boot1
 D=A
 @SP
 A=M
@@ -483,7 +483,7 @@ M=D
 //goto
 @Sys.init
 0;JMP
-(RETURN_ADDRESS_1)
+(boot1)
 //vm: function Sys.init 0
 //function
 (Sys.init)//vm: push constant 4
@@ -497,7 +497,7 @@ M=D
 M=M+1
 //vm: call Main.fibonacci 1
 //call
-@RETURN_ADDRESS_2
+@Sys.init2
 D=A
 @SP
 A=M
@@ -550,7 +550,7 @@ M=D
 //goto
 @Main.fibonacci
 0;JMP
-(RETURN_ADDRESS_2)
+(Sys.init2)
 //vm: label WHILE
 //label
 (WHILE)
