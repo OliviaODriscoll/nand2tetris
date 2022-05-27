@@ -4,60 +4,45 @@ D=A
 @SP
 M=D
 //call
-@RET_ADDRESS.1
+@RETURN_ADDRESS_1
 D=A
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//local push
-@0
-D=A
+//call push LCL
 @LCL
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//argument push
-@0
-D=A
+//call push ARG
 @ARG
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//this push
-@0
-D=A
+//call push THIS
 @THIS
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-//that push
-@0
-D=A
+//call push THAT
 @THAT
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-@SP
 D=M
 @0
 D=D-A
@@ -72,14 +57,15 @@ M=D
 //goto
 @Sys.init
 0;JMP
-(RET_ADDRESS.1)
+(RETURN_ADDRESS_1)
 //vm: function Main.fibonacci 0
+//function
 (Main.fibonacci)//vm: push argument 0
 //argument push
-@0
-D=A
 @ARG
-A=M+D
+D=M
+@0
+A=D+A
 D=M
 @SP
 A=M
@@ -96,31 +82,32 @@ M=D
 @SP
 M=M+1
 //vm: lt
-//JGE
+//arithmetic (JGE)
 @SP
 AM=M-1
 D=M
 @SP
 AM=M-1
 D=M-D
-@NOT_LT1
+@NOT_LT.1
 D;JGE
 @SP
 A=M
 M=-1
-@INC_SP_LT1
+@INC_SP_LT.1
 0;JMP
-(NOT_LT1)
+(NOT_LT.1)
 @SP
 A=M
 M=0
-(INC_SP_LT1)
+(INC_SP_LT.1)
 @SP
 M=M+1
 //vm: if-goto IF_TRUE
 //if
 @SP
 AM=M-1
+D=M
 @IF_TRUE
 D;JNE
 //vm: goto IF_FALSE
@@ -132,10 +119,10 @@ D;JNE
 (IF_TRUE)
 //vm: push argument 0
 //argument push
-@0
-D=A
 @ARG
-A=M+D
+D=M
+@0
+A=D+A
 D=M
 @SP
 A=M
@@ -146,14 +133,14 @@ M=M+1
 //return
 @LCL
 D=M
-@R13
+@FRAME
 M=D
 @5
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
-@R14
+@RETURN
 M=D
 @SP
 AM=M-1
@@ -167,33 +154,33 @@ D=M+1
 M=D
 @1
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @THAT
 M=D
 @2
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @THIS
 M=D
 @3
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @ARG
 M=D
 @4
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @LCL
 M=D
-@R14
+@RETURN
 A=M
 0;JMP
 //vm: label IF_FALSE
@@ -201,10 +188,10 @@ A=M
 (IF_FALSE)
 //vm: push argument 0
 //argument push
-@0
-D=A
 @ARG
-A=M+D
+D=M
+@0
+A=D+A
 D=M
 @SP
 A=M
@@ -232,60 +219,45 @@ M=M-D
 M=M+1
 //vm: call Main.fibonacci 1
 //call
-@RET_ADDRESS.2
+@RETURN_ADDRESS_2
 D=A
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//local push
-@0
-D=A
+//call push LCL
 @LCL
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//argument push
-@0
-D=A
+//call push ARG
 @ARG
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//this push
-@0
-D=A
+//call push THIS
 @THIS
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-//that push
-@0
-D=A
+//call push THAT
 @THAT
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-@SP
 D=M
 @1
 D=D-A
@@ -300,13 +272,13 @@ M=D
 //goto
 @Main.fibonacci
 0;JMP
-(RET_ADDRESS.2)
+(RETURN_ADDRESS_2)
 //vm: push argument 0
 //argument push
-@0
-D=A
 @ARG
-A=M+D
+D=M
+@0
+A=D+A
 D=M
 @SP
 A=M
@@ -334,60 +306,45 @@ M=M-D
 M=M+1
 //vm: call Main.fibonacci 1
 //call
-@RET_ADDRESS.3
+@RETURN_ADDRESS_3
 D=A
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//local push
-@0
-D=A
+//call push LCL
 @LCL
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//argument push
-@0
-D=A
+//call push ARG
 @ARG
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//this push
-@0
-D=A
+//call push THIS
 @THIS
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-//that push
-@0
-D=A
+//call push THAT
 @THAT
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-@SP
 D=M
 @1
 D=D-A
@@ -402,7 +359,7 @@ M=D
 //goto
 @Main.fibonacci
 0;JMP
-(RET_ADDRESS.3)
+(RETURN_ADDRESS_3)
 //vm: add
 //add
 @SP
@@ -417,14 +374,14 @@ M=M+1
 //return
 @LCL
 D=M
-@R13
+@FRAME
 M=D
 @5
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
-@R14
+@RETURN
 M=D
 @SP
 AM=M-1
@@ -438,35 +395,32 @@ D=M+1
 M=D
 @1
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @THAT
 M=D
 @2
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @THIS
 M=D
 @3
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @ARG
 M=D
 @4
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @LCL
 M=D
-@R14
+@RETURN
 A=M
-0;JMP
-(INFINITE_LOOP)
-@INFINITE_LOOP
 0;JMP

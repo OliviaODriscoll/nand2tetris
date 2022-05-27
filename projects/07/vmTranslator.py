@@ -15,7 +15,7 @@ folder = 'FunctionCalls/FibonacciElement/'  # end folder path with slash
 
 ########## define asmfile options #######
 doBootStrap = True
-doInfiniteLoop = True
+doInfiniteLoop = False
 
 ############ search folder for .vm files ######
 allfiles = os.listdir(basepath+folder)
@@ -25,7 +25,7 @@ for file in allfiles:
     if file.endswith('.vm'):
         vmfiles.append(file)
 
-vmfiles.reverse() # optional, lets you see sys.init at top of output code
+#vmfiles.reverse() # optional, lets you see sys.init at top of output code
 ################################################
 
 for file in vmfiles:
