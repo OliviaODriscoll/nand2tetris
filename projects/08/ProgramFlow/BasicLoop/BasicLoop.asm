@@ -1,4 +1,3 @@
-/// COMPARISON ENDED SUCCESSFULLY 05/23
 @256
 D=A
 @SP
@@ -12,7 +11,7 @@ M=D
 @SP
 M=M+1
 //local pop
-@0         // initializes sum = 0
+@0
 D=A
 @LCL
 A=M
@@ -26,7 +25,7 @@ D=M
 @LCL
 A=M
 M=D
-@0         // initializes sum = 0
+@0
 D=A
 @LCL
 A=M
@@ -67,7 +66,7 @@ M=M+D
 @SP
 M=M+1
 //local pop
-@0	        // sum = sum + counter
+@0
 D=A
 @LCL
 A=M
@@ -81,7 +80,7 @@ D=M
 @LCL
 A=M
 M=D
-@0	        // sum = sum + counter
+@0
 D=A
 @LCL
 A=M
@@ -117,7 +116,7 @@ M=M-D
 @SP
 M=M+1
 //argument pop
-@0      // counter--
+@0
 D=A
 @ARG
 D=M+D

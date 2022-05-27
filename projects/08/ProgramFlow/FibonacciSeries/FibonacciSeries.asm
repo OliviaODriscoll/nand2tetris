@@ -2,79 +2,6 @@
 D=A
 @SP
 M=D
-//init
-@256
-D=A
-@SP
-M=D
-@RET_ADDRESS.1
-D=A
-@SP
-A=M
-M=D
-@SP
-M=M+1
-//local push
-@0
-D=A
-@LCL
- A=M+D
- D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1
-//argument push
-@0
-D=A
-@ARG
-A=M+D
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1
-//this push
-@0
-D=A
-@THIS
-A=M+D
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1
-//that push
-@0
-D=A
-@THAT
-A=M+D
-D=M
-@SP
-A=M
-M=D
-@SP
-M=M+1
-@SP
-M=M+1
-D=M
-@0
-D=D-A
-@5
-D=D-A
-@ARG
-M=D
-@SP
-D=M
-@LCL
-M=D
-//goto
-@Sys.init
-0;JMP
-(RET_ADDRESS.1)
 //argument push
 @1
 D=A
@@ -87,7 +14,7 @@ M=D
 @SP
 M=M+1
 //pointer pop
-@1           // that = argument[1]
+@1
 D=A
 @3
 D=A+D
@@ -108,7 +35,7 @@ M=D
 @SP
 M=M+1
 //that pop
-@0              // first element in the series = 0
+@0
 D=A
 @THAT
 D=M+D
@@ -128,7 +55,7 @@ M=D
 @SP
 M=M+1
 //that pop
-@1              // second element in the series = 1
+@1
 D=A
 @THAT
 D=M+D
@@ -168,7 +95,7 @@ M=M-D
 @SP
 M=M+1
 //argument pop
-@0          // num_of_elements -= 2 (first 2 elements are set)
+@0
 D=A
 @ARG
 D=M+D
@@ -234,7 +161,7 @@ M=M+D
 @SP
 M=M+1
 //that pop
-@2              // that[2] = that[0] + that[1]
+@2
 D=A
 @THAT
 D=M+D
@@ -274,7 +201,7 @@ M=M+D
 @SP
 M=M+1
 //pointer pop
-@1           // that += 1
+@1
 D=A
 @3
 D=A+D
@@ -315,7 +242,7 @@ M=M-D
 @SP
 M=M+1
 //argument pop
-@0          // num_of_elements--
+@0
 D=A
 @ARG
 D=M+D

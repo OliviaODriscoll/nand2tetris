@@ -26,6 +26,7 @@ class parser():
 			if not (instruction.startswith('//') or instruction==''):
 				keepAdvancing = False
 		self.curInstruction = instruction
+		return self.curInstruction
 
 	def commandType(self):
 		instruction = self.curInstruction

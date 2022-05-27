@@ -1,11 +1,9 @@
+//init
 @256
 D=A
 @SP
 M=D
-@256
-D=A
-@SP
-M=D
+//call
 @RET_ADDRESS.1
 D=A
 @SP
@@ -17,8 +15,8 @@ M=M+1
 @0
 D=A
 @LCL
- A=M+D
- D=M
+A=M+D
+D=M
 @SP
 A=M
 M=D
@@ -46,6 +44,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 //that push
 @0
 D=A
@@ -57,6 +56,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 @SP
 D=M
 @0
@@ -89,6 +89,7 @@ A=M
 M=D
 @SP
 M=M+1
+//call
 @RET_ADDRESS.2
 D=A
 @SP
@@ -100,8 +101,8 @@ M=M+1
 @0
 D=A
 @LCL
- A=M+D
- D=M
+A=M+D
+D=M
 @SP
 A=M
 M=D
@@ -129,6 +130,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 //that push
 @0
 D=A
@@ -140,6 +142,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 @SP
 D=M
 @2
@@ -157,7 +160,7 @@ M=D
 0;JMP
 (RET_ADDRESS.2)
 //temp pop
-@0 // Dumps the return value
+@0
 D=A
 @5
 D=A+D
@@ -185,6 +188,7 @@ A=M
 M=D
 @SP
 M=M+1
+//call
 @RET_ADDRESS.3
 D=A
 @SP
@@ -196,8 +200,8 @@ M=M+1
 @0
 D=A
 @LCL
- A=M+D
- D=M
+A=M+D
+D=M
 @SP
 A=M
 M=D
@@ -225,6 +229,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 //that push
 @0
 D=A
@@ -236,6 +241,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 @SP
 D=M
 @2
@@ -253,7 +259,7 @@ M=D
 0;JMP
 (RET_ADDRESS.3)
 //temp pop
-@0 // Dumps the return value
+@0
 D=A
 @5
 D=A+D
@@ -265,6 +271,7 @@ D=M
 @R13
 A=M
 M=D
+//call
 @RET_ADDRESS.4
 D=A
 @SP
@@ -276,8 +283,8 @@ M=M+1
 @0
 D=A
 @LCL
- A=M+D
- D=M
+A=M+D
+D=M
 @SP
 A=M
 M=D
@@ -305,6 +312,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 //that push
 @0
 D=A
@@ -316,6 +324,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 @SP
 D=M
 @0
@@ -332,6 +341,7 @@ M=D
 @Class1.get
 0;JMP
 (RET_ADDRESS.4)
+//call
 @RET_ADDRESS.5
 D=A
 @SP
@@ -343,8 +353,8 @@ M=M+1
 @0
 D=A
 @LCL
- A=M+D
- D=M
+A=M+D
+D=M
 @SP
 A=M
 M=D
@@ -372,6 +382,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 //that push
 @0
 D=A
@@ -383,6 +394,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 @SP
 D=M
 @0
@@ -403,4 +415,7 @@ M=D
 (WHILE)
 //goto
 @WHILE
+0;JMP
+(INFINITE_LOOP)
+@INFINITE_LOOP
 0;JMP

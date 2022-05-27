@@ -1,11 +1,9 @@
+//init
 @256
 D=A
 @SP
 M=D
-@256
-D=A
-@SP
-M=D
+//call
 @RET_ADDRESS.1
 D=A
 @SP
@@ -17,8 +15,8 @@ M=M+1
 @0
 D=A
 @LCL
- A=M+D
- D=M
+A=M+D
+D=M
 @SP
 A=M
 M=D
@@ -46,6 +44,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 //that push
 @0
 D=A
@@ -57,6 +56,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 @SP
 D=M
 @0
@@ -128,7 +128,7 @@ D=M
 @R14
 M=D
 @SP
-A=M-1
+AM=M-1
 D=M
 @ARG
 A=M
@@ -206,7 +206,7 @@ D=M
 @R14
 M=D
 @SP
-A=M-1
+AM=M-1
 D=M
 @ARG
 A=M
@@ -245,4 +245,7 @@ D=M
 M=D
 @R14
 A=M
+0;JMP
+(INFINITE_LOOP)
+@INFINITE_LOOP
 0;JMP

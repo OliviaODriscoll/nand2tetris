@@ -11,7 +11,7 @@ M=D
 @SP
 M=M+1
 //local pop
-@index
+@0
 D=A
 @LCL
 A=M
@@ -25,7 +25,7 @@ D=M
 @LCL
 A=M
 M=D
-@index
+@0
 D=A
 @LCL
 A=M

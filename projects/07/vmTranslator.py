@@ -10,12 +10,12 @@ import os
 # file = f'{name}.vm' # test program
 
 ### define a path to the folder you want to translate ###
-basepath = 'G:/My Drive/2021-22/ICS4U/nand2tetris/projects/08/'  # project 08 folder
+basepath = 'G:/My Drive/2021-22/ICS4U/nand2tetris/projects/08/' # project 08 folder
 folder = 'FunctionCalls/FibonacciElement/'  # end folder path with slash
 
 ########## define asmfile options #######
 doBootStrap = True
-doInfiniteLoop = False
+doInfiniteLoop = True
 
 ############ search folder for .vm files ######
 allfiles = os.listdir(basepath+folder)
@@ -43,10 +43,11 @@ for file in vmfiles:
 
     ################ translate code, line by line #################
     while parseObj.hasMoreLines():  # check if there are lines in the input file left to be parsed
-        parseObj.advance()  # remove comments, blank lines, and get current instruction
+        curInstruction = parseObj.advance()  # remove comments, blank lines, and get current instruction
         comType = parseObj.commandType()  # measure command type of current instruction
         arg1 = parseObj.arg1()  # arg1 of command
         arg2 = parseObj.arg2()  # arg2 of command
+        codeObj.getCurInstruction(curInstruction)
         if comType == "C_PUSH" or comType == "C_POP":  # push pop command detected
             # translate a push pop command
             codeObj.writePushPop(comType, arg1, arg2)
@@ -64,7 +65,7 @@ for file in vmfiles:
             codeObj.writeCall(arg1, arg2)
         else:  # arithmetic command detected
             # translate an arithmetic command
-            codeObj.getArithmeticInstruction(parseObj.curInstruction)
+            codeObj.writeArithmetic(parseObj.curInstruction)
         #print('{} Command: {}, Type: {}'.format(parseObj.curIndex, parseObj.curInstruction,comType))
     if doInfiniteLoop:
         codeObj.infiniteLoop()

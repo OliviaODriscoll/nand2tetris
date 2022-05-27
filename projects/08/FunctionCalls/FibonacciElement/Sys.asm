@@ -1,12 +1,9 @@
-@256
-D=A
-@SP
-M=D
 //init
 @256
 D=A
 @SP
 M=D
+//call
 @RET_ADDRESS.1
 D=A
 @SP
@@ -18,8 +15,8 @@ M=M+1
 @0
 D=A
 @LCL
- A=M+D
- D=M
+A=M+D
+D=M
 @SP
 A=M
 M=D
@@ -47,6 +44,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 //that push
 @0
 D=A
@@ -58,8 +56,8 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 @SP
-M=M+1
 D=M
 @0
 D=D-A
@@ -75,7 +73,9 @@ M=D
 @Sys.init
 0;JMP
 (RET_ADDRESS.1)
-(Sys.init)//push constant
+//vm: function Sys.init 0
+(Sys.init)//vm: push constant 4
+//push constant
 @4
 D=A
 @SP
@@ -83,6 +83,8 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: call Main.fibonacci 1
+//call
 @RET_ADDRESS.2
 D=A
 @SP
@@ -94,8 +96,8 @@ M=M+1
 @0
 D=A
 @LCL
- A=M+D
- D=M
+A=M+D
+D=M
 @SP
 A=M
 M=D
@@ -123,6 +125,7 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 //that push
 @0
 D=A
@@ -134,8 +137,8 @@ A=M
 M=D
 @SP
 M=M+1
+//that push done
 @SP
-M=M+1
 D=M
 @1
 D=D-A
@@ -151,8 +154,13 @@ M=D
 @Main.fibonacci
 0;JMP
 (RET_ADDRESS.2)
+//vm: label WHILE
 //label
 (WHILE)
+//vm: goto WHILE
 //goto
 @WHILE
+0;JMP
+(INFINITE_LOOP)
+@INFINITE_LOOP
 0;JMP
