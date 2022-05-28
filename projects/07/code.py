@@ -133,12 +133,10 @@ class CodeWriter():
     def writePushPop(self, commandType, segment, index=0):
         """
         Writes a push or pop command.
-
         Parameters:
         commandType: Should be one of two possible string values ('C_PUSH' or 'C_POP')
         segment: A string representing the segment of RAM ('constant','temp','local','argument','this','that','R13','R14','R15')
         index: A string index measured from the base-address of the segment
-
         NOTE: Code will be expanded in steps
         """
 
@@ -149,7 +147,6 @@ class CodeWriter():
                 self.putDOnTopOfStack()
                 self.incSP()
             elif segment in ['R13', 'R14', 'R15']:
-                self.writeComment(f"push {segment}")
                 self.file.write(
                     f"@{segment}\n" +
                     "D=M\n")
@@ -167,27 +164,34 @@ class CodeWriter():
             elif segment in ["this", "that"]:
                 self.writeComment(f"{segment} push")
                 self.file.write(
+                    # load index
+                    f"@{index}\n" +
+                    # set d to index
+                    "D=A\n"
                     # load this/that
                     f"@{segment.upper()}\n" +
                     # set
+                    "A=M+D\n" +
                     "D=M\n")
                 self.putDOnTopOfStack()
                 self.incSP()
-                self.writeComment("that push done")
             elif segment == "argument":
                 self.writeComment("argument push")
+                self.loadValInD(index)
                 self.file.write(
                     # select arg
                     "@ARG\n" +
-                    "D=M\n" +
-                    f"@{index}\n" +
-                    "A=D+A\n" +
+                    "A=M+D\n" +
                     "D=M\n")
                 self.putDOnTopOfStack()
                 self.incSP()
             elif segment == "local":
                 self.writeComment("local push")
-                self.file.write("@LCL\n"+"D=M\n")
+                self.loadValInD(index)
+                self.file.write(
+                    "@LCL\n"+
+                    "A=M+D\n"+
+                    "D=M\n")
                 self.putDOnTopOfStack()
                 self.incSP()
             elif segment == "temp":
@@ -212,7 +216,6 @@ class CodeWriter():
 
         else:
             if segment in ['R13', 'R14', 'R15']:
-                self.writeComment(f"pop {segment}")
                 self.putTopValInD()
                 self.file.write(
                     f"@{segment}\n" +
@@ -477,7 +480,7 @@ class CodeWriter():
             # place in D
             "D=A\n" +
             # load frame
-            "@FRAME\n" +
+            "@R13\n" +
             # put address val in A
             "A=M-D\n" +
             # get the value at the memory address being pointed to
@@ -498,7 +501,7 @@ class CodeWriter():
             # frame in d
             "D=M\n" +
             # temp reg
-            "@FRAME\n" +
+            "@R13\n" +
             # put frame into that temp reg
             "M=D\n" +
             # retAddress = *(frame – 5) -- we are subtracting 5 so load that
@@ -506,13 +509,13 @@ class CodeWriter():
             # put 5 in D
             "D=A\n" +
             # load frame from the earlier temp var earlier
-            "@FRAME\n" +
+            "@R13\n" +
             # put the difference into temp reg
             "A=M-D\n" +
             # get val at that address in memory (pointing)
             "D=M\n" +
             # load to temp var
-            "@RETURN\n" +
+            "@R14\n" +
             # load to temp var step 2
             "M=D\n")
         # *ARG = pop()
@@ -543,7 +546,7 @@ class CodeWriter():
         self.file.write(
             # goto retAddress
             # load retAddress
-            "@RETURN\n" +
+            "@R14\n" +
             "A=M\n" +
             # jump unconditionally to ret address
             "0;JMP\n")

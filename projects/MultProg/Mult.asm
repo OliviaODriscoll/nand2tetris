@@ -4,60 +4,45 @@ D=A
 @SP
 M=D
 //call
-@@RET_ADDRESS.1
+@boot1
 D=A
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//local push
-@0
-D=A
+//call push LCL
 @LCL
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//argument push
-@0
-D=A
+//call push ARG
 @ARG
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//this push
-@0
-D=A
+//call push THIS
 @THIS
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-//that push
-@0
-D=A
+//call push THAT
 @THAT
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-@SP
 D=M
 @0
 D=D-A
@@ -72,8 +57,9 @@ M=D
 //goto
 @Sys.init
 0;JMP
-(RET_ADDRESS.1)
+(boot1)
 //vm: function Mult.mult 2
+//function
 (Mult.mult)//push constant
 @0
 D=A
@@ -90,6 +76,22 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: push constant 3
+//push constant
+@3
+D=A
+@SP
+A=M
+M=D
+@SP
+M=M+1
+//vm: pop static 0
+//static pop
+@SP
+AM=M-1
+D=M
+@Mult.0
+M=D
 //vm: push constant 4503
 //push constant
 @4503
@@ -144,8 +146,8 @@ M=D
 @0
 D=A
 @LCL
-A=M+D
-D=M
+ A=M+D
+ D=M
 @SP
 A=M
 M=D
@@ -210,8 +212,8 @@ M=M+1
 @1
 D=A
 @LCL
-A=M+D
-D=M
+ A=M+D
+ D=M
 @SP
 A=M
 M=D
@@ -267,33 +269,33 @@ M=M+1
 @1
 D=A
 @LCL
-A=M+D
-D=M
+ A=M+D
+ D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
 //vm: eq
-//JNE
+//arithmetic (JNE)
 @SP
 AM=M-1
 D=M
 @SP
 AM=M-1
 D=M-D
-@NOT_EQ1
+@NOT_EQ.1
 D;JNE
 @SP
 A=M
 M=-1
-@INC_SP_EQ1
+@INC_SP_EQ.1
 0;JMP
-(NOT_EQ1)
+(NOT_EQ.1)
 @SP
 A=M
 M=0
-(INC_SP_EQ1)
+(INC_SP_EQ.1)
 @SP
 M=M+1
 //vm: not
@@ -307,6 +309,7 @@ M=M+1
 //if
 @SP
 AM=M-1
+D=M
 @WHILE_LOOP
 D;JNE
 //vm: push local 0
@@ -314,8 +317,8 @@ D;JNE
 @0
 D=A
 @LCL
-A=M+D
-D=M
+ A=M+D
+ D=M
 @SP
 A=M
 M=D
@@ -347,60 +350,45 @@ M=D
 M=M+1
 //vm: call Mult.store 3
 //call
-@@RET_ADDRESS.2
+@Mult.mult2
 D=A
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//local push
-@0
-D=A
+//call push LCL
 @LCL
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//argument push
-@0
-D=A
+//call push ARG
 @ARG
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//this push
-@0
-D=A
+//call push THIS
 @THIS
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-//that push
-@0
-D=A
+//call push THAT
 @THAT
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-@SP
 D=M
 @3
 D=D-A
@@ -415,14 +403,14 @@ M=D
 //goto
 @Mult.store
 0;JMP
-(RET_ADDRESS.2)
+(Mult.mult2)
 //vm: push local 0
 //local push
 @0
 D=A
 @LCL
-A=M+D
-D=M
+ A=M+D
+ D=M
 @SP
 A=M
 M=D
@@ -483,6 +471,7 @@ M=D
 A=M
 0;JMP
 //vm: function Mult.store 0
+//function
 (Mult.store)//vm: push argument 0
 //argument push
 @0
@@ -611,7 +600,4 @@ D=M
 M=D
 @R14
 A=M
-0;JMP
-(INFINITE_LOOP)
-@INFINITE_LOOP
 0;JMP

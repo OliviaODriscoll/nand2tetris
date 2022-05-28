@@ -1,7 +1,5 @@
-@256
-D=A
-@SP
-M=D
+//vm: function SimpleFunction.test 2
+//function
 (SimpleFunction.test)//push constant
 @0
 D=A
@@ -18,6 +16,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: push local 0
 //local push
 @0
 D=A
@@ -29,6 +28,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: push local 1
 //local push
 @1
 D=A
@@ -40,6 +40,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: add
 //add
 @SP
 AM=M-1
@@ -49,12 +50,14 @@ AM=M-1
 M=M+D
 @SP
 M=M+1
+//vm: not
 //not
 @SP
 AM=M-1
 M=!M
 @SP
 M=M+1
+//vm: push argument 0
 //argument push
 @0
 D=A
@@ -66,6 +69,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: add
 //add
 @SP
 AM=M-1
@@ -75,6 +79,7 @@ AM=M-1
 M=M+D
 @SP
 M=M+1
+//vm: push argument 1
 //argument push
 @1
 D=A
@@ -86,6 +91,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: sub
 //sub
 @SP
 AM=M-1
@@ -95,17 +101,18 @@ AM=M-1
 M=M-D
 @SP
 M=M+1
+//vm: return
 //return
 @LCL
 D=M
-@R13
+@FRAME
 M=D
 @5
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
-@R14
+@RETURN
 M=D
 @SP
 AM=M-1
@@ -119,32 +126,32 @@ D=M+1
 M=D
 @1
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @THAT
 M=D
 @2
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @THIS
 M=D
 @3
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @ARG
 M=D
 @4
 D=A
-@R13
+@FRAME
 A=M-D
 D=M
 @LCL
 M=D
-@R14
+@RETURN
 A=M
 0;JMP

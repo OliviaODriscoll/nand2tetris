@@ -1,5 +1,9 @@
 function Mult.mult 2
 
+// define a useless static variable 
+push constant 3
+pop static 0
+
 // overwrite THIS and THAT values
 push constant 4503
 pop pointer 0

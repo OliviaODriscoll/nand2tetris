@@ -62,10 +62,10 @@ M=D
 //function
 (Main.fibonacci)//vm: push argument 0
 //argument push
-@ARG
-D=M
 @0
-A=D+A
+D=A
+@ARG
+A=M+D
 D=M
 @SP
 A=M
@@ -119,10 +119,10 @@ D;JNE
 (IF_TRUE)
 //vm: push argument 0
 //argument push
-@ARG
-D=M
 @0
-A=D+A
+D=A
+@ARG
+A=M+D
 D=M
 @SP
 A=M
@@ -188,10 +188,10 @@ A=M
 (IF_FALSE)
 //vm: push argument 0
 //argument push
-@ARG
-D=M
 @0
-A=D+A
+D=A
+@ARG
+A=M+D
 D=M
 @SP
 A=M
@@ -275,10 +275,10 @@ M=D
 (Main.fibonacci2)
 //vm: push argument 0
 //argument push
-@ARG
-D=M
 @0
-A=D+A
+D=A
+@ARG
+A=M+D
 D=M
 @SP
 A=M

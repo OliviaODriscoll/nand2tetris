@@ -4,60 +4,45 @@ D=A
 @SP
 M=D
 //call
-@@RET_ADDRESS.1
+@boot1
 D=A
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//local push
-@0
-D=A
+//call push LCL
 @LCL
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//argument push
-@0
-D=A
+//call push ARG
 @ARG
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//this push
-@0
-D=A
+//call push THIS
 @THIS
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-//that push
-@0
-D=A
+//call push THAT
 @THAT
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-@SP
 D=M
 @0
 D=D-A
@@ -72,8 +57,9 @@ M=D
 //goto
 @Sys.init
 0;JMP
-(RET_ADDRESS.1)
+(boot1)
 //vm: function Sys.init 0
+//function
 (Sys.init)//vm: push constant 4500
 //push constant
 @4500
@@ -172,60 +158,45 @@ M=D
 M=M+1
 //vm: call Mult.mult 2
 //call
-@@RET_ADDRESS.2
+@Sys.init2
 D=A
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//local push
-@0
-D=A
+//call push LCL
 @LCL
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//argument push
-@0
-D=A
+//call push ARG
 @ARG
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//this push
-@0
-D=A
+//call push THIS
 @THIS
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-//that push
-@0
-D=A
+//call push THAT
 @THAT
-A=M+D
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-//that push done
-@SP
 D=M
 @2
 D=D-A
@@ -240,7 +211,7 @@ M=D
 //goto
 @Mult.mult
 0;JMP
-(RET_ADDRESS.2)
+(Sys.init2)
 //vm: push static 0
 //static push
 @Sys.0
@@ -389,7 +360,4 @@ M=D//vm: label ENDLOOP
 //vm: goto ENDLOOP
 //goto
 @ENDLOOP
-0;JMP
-(INFINITE_LOOP)
-@INFINITE_LOOP
 0;JMP

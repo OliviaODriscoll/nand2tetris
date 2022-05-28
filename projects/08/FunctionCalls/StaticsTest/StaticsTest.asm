@@ -419,10 +419,10 @@ M=D
 //function
 (Class2.set)//vm: push argument 0
 //argument push
-@ARG
-D=M
 @0
-A=D+A
+D=A
+@ARG
+A=M+D
 D=M
 @SP
 A=M
@@ -438,10 +438,10 @@ D=M
 M=D
 //vm: push argument 1
 //argument push
-@ARG
-D=M
 @1
-A=D+A
+D=A
+@ARG
+A=M+D
 D=M
 @SP
 A=M
@@ -666,10 +666,10 @@ M=D
 //function
 (Class1.set)//vm: push argument 0
 //argument push
-@ARG
-D=M
 @0
-A=D+A
+D=A
+@ARG
+A=M+D
 D=M
 @SP
 A=M
@@ -685,10 +685,10 @@ D=M
 M=D
 //vm: push argument 1
 //argument push
-@ARG
-D=M
 @1
-A=D+A
+D=A
+@ARG
+A=M+D
 D=M
 @SP
 A=M

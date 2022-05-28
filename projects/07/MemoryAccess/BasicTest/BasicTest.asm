@@ -1,7 +1,4 @@
-@256
-D=A
-@SP
-M=D
+//vm: push constant 10
 //push constant
 @10
 D=A
@@ -10,6 +7,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: pop local 0
 //local pop
 @0
 D=A
@@ -32,6 +30,7 @@ A=M
 D=A-D
 @LCL
 M=D
+//vm: push constant 21
 //push constant
 @21
 D=A
@@ -40,6 +39,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: push constant 22
 //push constant
 @22
 D=A
@@ -48,6 +48,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: pop argument 2
 //argument pop
 @2
 D=A
@@ -60,7 +61,8 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D//argument pop
+M=D//vm: pop argument 1
+//argument pop
 @1
 D=A
 @ARG
@@ -72,7 +74,8 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D//push constant
+M=D//vm: push constant 36
+//push constant
 @36
 D=A
 @SP
@@ -80,6 +83,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: pop this 6
 //this pop
 @6
 D=A
@@ -92,7 +96,8 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D//push constant
+M=D//vm: push constant 42
+//push constant
 @42
 D=A
 @SP
@@ -100,6 +105,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: push constant 45
 //push constant
 @45
 D=A
@@ -108,6 +114,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: pop that 5
 //that pop
 @5
 D=A
@@ -120,7 +127,8 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D//that pop
+M=D//vm: pop that 2
+//that pop
 @2
 D=A
 @THAT
@@ -132,7 +140,8 @@ AM=M-1
 D=M
 @R13
 A=M
-M=D//push constant
+M=D//vm: push constant 510
+//push constant
 @510
 D=A
 @SP
@@ -140,6 +149,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: pop temp 6
 //temp pop
 @6
 D=A
@@ -153,6 +163,7 @@ D=M
 @R13
 A=M
 M=D
+//vm: push local 0
 //local push
 @0
 D=A
@@ -164,6 +175,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: push that 5
 //that push
 @5
 D=A
@@ -175,6 +187,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: add
 //add
 @SP
 AM=M-1
@@ -184,6 +197,7 @@ AM=M-1
 M=M+D
 @SP
 M=M+1
+//vm: push argument 1
 //argument push
 @1
 D=A
@@ -195,6 +209,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: sub
 //sub
 @SP
 AM=M-1
@@ -204,6 +219,7 @@ AM=M-1
 M=M-D
 @SP
 M=M+1
+//vm: push this 6
 //this push
 @6
 D=A
@@ -215,6 +231,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: push this 6
 //this push
 @6
 D=A
@@ -226,6 +243,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: add
 //add
 @SP
 AM=M-1
@@ -235,6 +253,7 @@ AM=M-1
 M=M+D
 @SP
 M=M+1
+//vm: sub
 //sub
 @SP
 AM=M-1
@@ -244,6 +263,7 @@ AM=M-1
 M=M-D
 @SP
 M=M+1
+//vm: push temp 6
 //temp push
 @6
 D=A
@@ -255,6 +275,7 @@ A=M
 M=D
 @SP
 M=M+1
+//vm: add
 //add
 @SP
 AM=M-1
